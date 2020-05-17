@@ -7,7 +7,7 @@ struct Vertex
 	GLfloat u,v;
 };
 
-static const Vertex squareVertices[] = {
+static const Vertex gs_squareVertices[] = {
 	{ 100.0f, 100.0f,	0, 2 }, 
 	{ 100.0f, 300.0f,	0, 0 }, 
 	{ 300.0f, 300.0f,	2, 0 }, 
@@ -17,7 +17,7 @@ static const Vertex squareVertices[] = {
 	{ 100.0f, 100.0,	0, 2 }, 
 };
 
-static GLubyte textureData[] = {
+static GLubyte gs_textureData[] = {
      0, 0, 255,  // blue
      255, 255, 0, // yellow
      255, 0, 0,  // red
@@ -41,7 +41,7 @@ void SampleWrapModes::init()
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		m_pProgram = wolf::ProgramManager::CreateProgram("data/one_texture.vsh", "data/one_texture.fsh");
-		m_pVB = wolf::BufferManager::CreateVertexBuffer(squareVertices, sizeof(Vertex) * 6);
+		m_pVB = wolf::BufferManager::CreateVertexBuffer(gs_squareVertices, sizeof(Vertex) * 6);
 
 		m_pDecl = new wolf::VertexDeclaration();
 		m_pDecl->Begin();
@@ -52,7 +52,7 @@ void SampleWrapModes::init()
 
 		glGenTextures(1, &m_tex);
 		glBindTexture(GL_TEXTURE_2D, m_tex);
-		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, textureData);
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, 2, 2, 0, GL_RGB, GL_UNSIGNED_BYTE, gs_textureData);
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);

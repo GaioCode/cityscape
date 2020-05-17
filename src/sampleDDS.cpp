@@ -7,7 +7,7 @@ struct Vertex
 	GLfloat u,v;
 };
 
-static const Vertex squareVertices[] = {
+static const Vertex gs_squareVertices[] = {
 	{ 100.0f, 100.0f,	0, 1 }, 
 	{ 100.0f, 300.0f,	0, 0 }, 
 	{ 300.0f, 300.0f,	1, 0 }, 
@@ -34,7 +34,7 @@ void SampleDDS::init()
         glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
         m_pProgram = wolf::ProgramManager::CreateProgram("data/one_texture.vsh", "data/one_texture.fsh");
-        m_pVB = wolf::BufferManager::CreateVertexBuffer(squareVertices, sizeof(Vertex) * 6);
+        m_pVB = wolf::BufferManager::CreateVertexBuffer(gs_squareVertices, sizeof(Vertex) * 6);
 
         m_pDecl = new wolf::VertexDeclaration();
         m_pDecl->Begin();

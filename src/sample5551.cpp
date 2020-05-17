@@ -7,7 +7,7 @@ struct Vertex
 	GLfloat u,v;
 };
 
-static const Vertex squareVertices[] = {
+static const Vertex gs_squareVertices[] = {
 	{ 100.0f, 100.0f,	0, 1 }, 
 	{ 100.0f, 300.0f,	0, 0 }, 
 	{ 300.0f, 300.0f,	1, 0 }, 
@@ -21,7 +21,7 @@ static const Vertex squareVertices[] = {
 
 #if TEX == 0
 
-static GLushort g_aTexture[] =
+static GLushort gs_textureData[] =
 {
 	 0x003f,  // blue
      0xffc1, // yellow
@@ -31,7 +31,7 @@ static GLushort g_aTexture[] =
 
 #else
 
-static GLushort g_aTexture[32*32];
+static GLushort gs_textureData[32*32];
 
 #endif
 
@@ -52,7 +52,7 @@ void Sample5551::init()
 		glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
 		m_pProgram = wolf::ProgramManager::CreateProgram("data/one_texture.vsh", "data/one_texture.fsh");
-		m_pVB = wolf::BufferManager::CreateVertexBuffer(squareVertices, sizeof(Vertex) * 6);
+		m_pVB = wolf::BufferManager::CreateVertexBuffer(gs_squareVertices, sizeof(Vertex) * 6);
 
 		m_pDecl = new wolf::VertexDeclaration();
 		m_pDecl->Begin();
@@ -65,17 +65,17 @@ void Sample5551::init()
         glBindTexture(GL_TEXTURE_2D, m_tex);
 
 #if TEX == 0
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, g_aTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 2, 2, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, gs_textureData);
 #else
         for (int v = 0; v < 32; v++)
         {
             for (int u = 0; u < 32; u++)
             {
-                g_aTexture[v * 32 + u] = 0x0001 | (v << 1);
+                gs_textureData[v * 32 + u] = 0x0001 | (v << 1);
             }
         }
 
-        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, g_aTexture);
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 32, 32, 0, GL_RGBA, GL_UNSIGNED_SHORT_5_5_5_1, gs_textureData);
 #endif
 
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
