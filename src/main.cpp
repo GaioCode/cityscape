@@ -10,7 +10,7 @@
 #include "sample565.h"
 #include "sampleDDS.h"
 
-class Week2: public App
+class Week2: public wolf::App
 {
 public:
     Week2() : App("Week 4")

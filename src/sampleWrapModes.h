@@ -5,7 +5,7 @@
 class SampleWrapModes: public Sample
 {
 public:
-    SampleWrapModes(App* pApp) : Sample(pApp,"Texture Wrap Modes") {}
+    SampleWrapModes(wolf::App* pApp) : Sample(pApp,"Texture Wrap Modes") {}
     ~SampleWrapModes();
 
     void init() override;

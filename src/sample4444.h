@@ -5,7 +5,7 @@
 class Sample4444: public Sample
 {
 public:
-    Sample4444(App* pApp) : Sample(pApp,"Texture Format 4444") {}
+    Sample4444(wolf::App* pApp) : Sample(pApp,"Texture Format 4444") {}
     ~Sample4444();
 
     void init() override;

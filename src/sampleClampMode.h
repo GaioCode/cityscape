@@ -5,7 +5,7 @@
 class SampleClampMode: public Sample
 {
 public:
-    SampleClampMode(App* pApp) : Sample(pApp,"Texture Clamp Modes") {}
+    SampleClampMode(wolf::App* pApp) : Sample(pApp,"Texture Clamp Modes") {}
     ~SampleClampMode();
 
     void init() override;

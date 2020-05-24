@@ -5,7 +5,7 @@
 class SampleDDS: public Sample
 {
 public:
-    SampleDDS(App* pApp) : Sample(pApp,"Texture Format DDS") {}
+    SampleDDS(wolf::App* pApp) : Sample(pApp,"Texture Format DDS") {}
     ~SampleDDS();
 
     void init() override;

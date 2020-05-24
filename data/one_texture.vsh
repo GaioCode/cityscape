@@ -1,4 +1,3 @@
-#version 150
 uniform mat4 projection;
 in vec4 a_position;
 in vec2 a_uv1;
