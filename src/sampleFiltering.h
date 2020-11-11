@@ -2,11 +2,11 @@
 #include "../wolf/wolf.h"
 #include "../samplefw/Sample.h"
 
-class SampleClampMode: public Sample
+class SampleFiltering: public Sample
 {
 public:
-    SampleClampMode(wolf::App* pApp) : Sample(pApp,"Texture Clamp Modes") {}
-    ~SampleClampMode();
+    SampleFiltering(wolf::App* pApp) : Sample(pApp,"Texture Filtering") {}
+    ~SampleFiltering();
 
     void init() override;
     void update(float dt) override;
@@ -15,8 +15,8 @@ public:
 private:
     wolf::VertexBuffer* m_pVB = nullptr;
     wolf::VertexDeclaration* m_pDecl = nullptr;
-    wolf::Program* m_pProgram = nullptr;
-    GLuint m_tex = 0;
+    wolf::Material* m_pMat = nullptr;
+    wolf::Texture* m_pTex = nullptr;
+    bool m_keyDown = false;
+    bool m_isLinear = false;
 };
-
-

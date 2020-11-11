@@ -15,6 +15,9 @@ public:
 private:
     wolf::VertexBuffer* m_pVB = nullptr;
     wolf::VertexDeclaration* m_pDecl = nullptr;
-    wolf::Program* m_pProgram = nullptr;
-    GLuint m_tex = 0;
+    wolf::Material* m_pMat = nullptr;
+    wolf::Texture* m_pTex1 = nullptr;
+    wolf::Texture* m_pTex2 = nullptr;
+    wolf::Texture* m_pCurrTex = nullptr;
+    bool m_keyDown = false;
 };
