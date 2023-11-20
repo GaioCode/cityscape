@@ -3,26 +3,15 @@
 #include <glm/glm.hpp>
 #include "../wolf/wolf.h"
 #include "../samplefw/SampleRunner.h"
-#include "sampleFiltering.h"
-#include "sampleMipmaps.h"
-#include "sampleWrapRepeat.h"
-#include "sampleWrapClamp.h"
-#include "sample4444.h"
-#include "sample5551.h"
-#include "sample565.h"
+#include "cityscape.h"
 
 class Week2: public wolf::App
 {
 public:
     Week2() : App("Week 4")
     {
-        m_sampleRunner.addSample(new SampleWrapRepeat(this));
-        m_sampleRunner.addSample(new SampleWrapClamp(this));
-        m_sampleRunner.addSample(new SampleFiltering(this));
-        m_sampleRunner.addSample(new SampleMipmaps(this));
-        m_sampleRunner.addSample(new Sample4444(this));
-        m_sampleRunner.addSample(new Sample5551(this));
-        m_sampleRunner.addSample(new Sample565(this));
+        // m_sampleRunner.addSample(new SampleWrapRepeat(this));
+        m_sampleRunner.addSample(new Cityscape(this));
     }
 
     ~Week2()

@@ -84,6 +84,15 @@ file(GLOB_RECURSE WOLF_HEADER_FILES
 	${CMAKE_SOURCE_DIR}/wolf/*.h
     ${CMAKE_SOURCE_DIR}/wolf/*.hpp)
 
+file(GLOB_RECURSE SHEEP_SOURCE_FILES 
+	${CMAKE_SOURCE_DIR}/sheep/*.c
+    ${CMAKE_SOURCE_DIR}/sheep/*.cpp)
+
+file(GLOB_RECURSE SHEEP_HEADER_FILES 
+	${CMAKE_SOURCE_DIR}/sheep/*.h
+    ${CMAKE_SOURCE_DIR}/sheep/*.hpp)
+
+
 file(GLOB_RECURSE SOURCE_FILES 
 	${CMAKE_SOURCE_DIR}/src/*.c
 	${CMAKE_SOURCE_DIR}/src/*.cpp)
@@ -97,6 +106,8 @@ add_executable(sample
     ${SAMPLEFW_HEADER_FILES}
     ${WOLF_SOURCE_FILES}
     ${WOLF_HEADER_FILES}
+    ${SHEEP_SOURCE_FILES}
+    ${SHEEP_HEADER_FILES}
     ${SOURCE_FILES}
     ${HEADER_FILES}
     )
