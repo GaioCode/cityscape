@@ -12,23 +12,26 @@ namespace sheep
             ~FirstPersonCamera();
             void update(float dt);
 
-
-            // Deduct the current camera position with target (origin) vector to get the actual camera's position.
             void setCameraPosition(glm::vec3 newVector);
-            void updateCameraDirection();
-            void updateCameraRight();
-            void updateCameraUp();
-            void setFrontVector(glm::vec3 newVector);
-            
+
             // Returns the projection matrix.
             glm::mat4 getProjectionMatrix(int width, int height);
 
             // Returns the view matrix.
             glm::mat4 getViewMatrix();
             
-            // TODO: Fill up camera methods
+            // Debugging tool to print camera information in console
+            void printCameraInfo();
 
         private:
+            void updateCameraDirection();
+            void updateCameraRight();
+            void updateCameraUp();
+
+            // Updates the camera's front vector relative to changes in the mouse's current position from its previous
+            // position.
+            void mouseCallback(glm::vec2 mousePosition);
+
             wolf::App* application = nullptr;
             glm::vec2 lastMousePosition = glm::vec2(0.0f);
 
@@ -69,7 +72,14 @@ namespace sheep
             // Time of current frame
             float currentFrame;
 
+            float yaw;
+            float pitch;
 
+            // Previous position of the mouse relative to the current screen's size
+            glm::vec2 mouseLastPosition;
+
+            // Check if receiving mouse input for the first time
+            GLboolean isFirstMouseInput = GL_TRUE;
     };
 }
 

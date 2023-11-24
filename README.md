@@ -12,6 +12,7 @@ engine created by Gordon Wood.
 
 ## Controls
 - Use the WASD keys and mouse for first-person movement (mouse to be implemented).
-- Use the Shift key to sprint.
+- Use Left-Control to sprint.
+- Use Spacebar to ascend and Left-Shift to descend.
 
 (This document is incomplete. More features and details will be added soon.)
