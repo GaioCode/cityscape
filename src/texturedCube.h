@@ -18,9 +18,7 @@ class TexturedCube
        void render(const std::string& worldUniform, const std::string& viewUniform, const std::string& projectionUniform,
        const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix);
 
-       void translate();
-
-        // Reposition the cube or set it to a location in world space
+        // Set the cube to a new location in world space
         // param x - x value to translate
         // param y - y value to translate
         // param z - z value to translate
