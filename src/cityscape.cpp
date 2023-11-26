@@ -8,6 +8,7 @@ Cityscape::~Cityscape()
     wolf::ProgramManager::DestroyProgram(mainProgram);
     printf("Cityscape World destructed successfully.\n");
     delete cube1;       // TODO: Remove later
+    delete texturedCube1;   // TODO: Remove later
 }
 
 void Cityscape::init()
@@ -20,6 +21,10 @@ void Cityscape::init()
 
         // Render objects
         cube1 = new Cube(mainProgram, "position", "color");     // TODO: Remove later
+        texturedCube1 = new TexturedCube(mainProgram, "position", "color");     // TODO: Remove later
+
+        cube1->translate(0.0f, 0.0f, 0.0f);
+        texturedCube1->translate(2.0f, 2.0f, 2.0f);
     }
 }
 
@@ -40,4 +45,5 @@ void Cityscape::render(int width, int height)
     glm::mat4 projectionViewMatrix = projectionMatrix * viewMatrix;
 
     cube1->render("world", "projectionView", projectionViewMatrix);     // TODO: Remove later
+    texturedCube1->render("world", "projectionView", projectionViewMatrix);     // TODO: Remove later
 }

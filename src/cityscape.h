@@ -2,6 +2,8 @@
 #include "../wolf/wolf.h"
 #include "../samplefw/Sample.h"
 #include "../sheep/tools/firstPersonCamera.h"
+#include "cube.h"
+#include "texturedCube.h"
 
 // Objects
 #include "cube.h"
@@ -24,4 +26,5 @@ class Cityscape: public Sample
 
         // TODO: Remove later
         Cube* cube1;
+        TexturedCube* texturedCube1;
 };

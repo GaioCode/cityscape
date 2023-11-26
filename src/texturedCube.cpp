@@ -1,4 +1,4 @@
-#include "cube.h"
+#include "texturedCube.h"
 
 static const sheep::VertexPosition3D cubeVertices[]
 {
@@ -59,7 +59,7 @@ static wolf::VertexBuffer* positionVBO = 0;       // VBO
 static std::string colorUniform;       // TODO: Remove color later
 
 
-Cube::Cube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam)
+TexturedCube::TexturedCube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam)
 {
     if (!isProgramGenerated)
     {
@@ -85,7 +85,7 @@ Cube::Cube(wolf::Program* programParam, const std::string& positionUniformParam,
     
 }
 
-Cube::~Cube()
+TexturedCube::~TexturedCube()
 {
     if (isProgramGenerated)
     {
@@ -98,12 +98,12 @@ Cube::~Cube()
     
 }
 
-void Cube::update(float dt)
+void TexturedCube::update(float dt)
 {
     this->time += dt;
 }
 
-void Cube::render(const std::string& worldUniform, const std::string& projectionViewUniform, 
+void TexturedCube::render(const std::string& worldUniform, const std::string& projectionViewUniform, 
 const glm::mat4& projectionViewMatrix)
 {
 	// Convert object space to world space
@@ -128,7 +128,7 @@ const glm::mat4& projectionViewMatrix)
 
 }
 
-void Cube::render(const std::string& worldUniform, const std::string& viewUniform, const std::string& projectionUniform, 
+void TexturedCube::render(const std::string& worldUniform, const std::string& viewUniform, const std::string& projectionUniform, 
 const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix)
 {
 	// Convert object space to world space
@@ -154,26 +154,26 @@ const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix)
 
 }
 
-void Cube::translate(GLfloat x, GLfloat y, GLfloat z)
+void TexturedCube::translate(GLfloat x, GLfloat y, GLfloat z)
 {
 	this->translateVector = glm::vec3(x, y, z);
 };
 
 
-void Cube::scale(GLfloat x, GLfloat y, GLfloat z)
+void TexturedCube::scale(GLfloat x, GLfloat y, GLfloat z)
 {
 	this->scaleVector = glm::vec3(x, y, z);
 };
 
 
-void Cube::rotate(GLfloat x, GLfloat y, GLfloat z)
+void TexturedCube::rotate(GLfloat x, GLfloat y, GLfloat z)
 {
 	this->rotateX = x;
 	this->rotateY = y;
 	this->rotateZ = z;
 };
 
-void Cube::setColor(const glm::vec4& color)
+void TexturedCube::setColor(const glm::vec4& color)
 {
 	this->colorVector = color;
 };

@@ -3,12 +3,12 @@
 #include "../samplefw/Sample.h"
 #include "../sheep/structures/basicStructures.h"
 
-class Cube
+class TexturedCube
 {
     public:
-       Cube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam);
+       TexturedCube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam);
 
-       ~Cube();
+       ~TexturedCube();
 
        void update(float dt);
 
