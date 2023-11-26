@@ -186,7 +186,6 @@ namespace sheep
 
         printCameraInfo();
 
-        // return glm::lookAt(glm::vec3(0.0f, 0.0f, 4.0f), glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
         return glm::lookAt(this->cameraPositionVector, this->cameraPositionVector + this->cameraFrontVector, 
         this->cameraUpVector);
         
