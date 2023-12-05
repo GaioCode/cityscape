@@ -25,6 +25,6 @@ class Cityscape: public Sample
         GLfloat time = 0;
 
         // TODO: Remove later
-        Cube* cube1;
+       //  Cube* cube1;
         TexturedCube* texturedCube1;
 };

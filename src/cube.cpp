@@ -56,7 +56,7 @@ static wolf::Program* program = 0;
 static wolf::VertexDeclaration* vao = 0;     // VAO
 static wolf::VertexBuffer* positionVBO = 0;       // VBO
 
-static std::string colorUniform;       // TODO: Remove color later
+static std::string colorUniform;
 
 
 Cube::Cube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam)
@@ -120,7 +120,6 @@ const glm::mat4& projectionViewMatrix)
 	program->SetUniform(projectionViewUniform, projectionViewMatrix);
 	program->SetUniform(worldUniform, worldMatrix);
 
-	// TODO: Remove colors later
 	program->SetUniform(colorUniform, colorVector);
 
 	program->Bind();
@@ -146,10 +145,9 @@ const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix)
 	program->SetUniform(viewUniform, viewMatrix);
 	program->SetUniform(worldUniform, worldMatrix);
 
-	// TODO: Remove colors later
 	program->SetUniform(colorUniform, colorVector);
 
-	program->Bind();
+	vao->Bind();
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 }

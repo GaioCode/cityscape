@@ -6,8 +6,9 @@ Cityscape::~Cityscape()
 {
     printf("Destructing Cityscape World...\n");
     wolf::ProgramManager::DestroyProgram(mainProgram);
+    // wolf::ProgramManager::DestroyProgram(mainProgramTexture);   // TODO: Merge programs later
     printf("Cityscape World destructed successfully.\n");
-    delete cube1;       // TODO: Remove later
+    // delete cube1;       // TODO: Remove later
     delete texturedCube1;   // TODO: Remove later
 }
 
@@ -16,14 +17,17 @@ void Cityscape::init()
     // Initialize program for the first time
     if (!mainProgram)
     {
-        mainProgram = wolf::ProgramManager::CreateProgram("data/basic.vsh", "data/basic.fsh");
+        glEnable(GL_DEPTH_TEST);
+
+        mainProgram = wolf::ProgramManager::CreateProgram("data/texture.vsh", "data/texture.fsh");
         this->camera = new sheep::FirstPersonCamera(m_pApp);
 
         // Render objects
-        cube1 = new Cube(mainProgram, "position", "color");     // TODO: Remove later
-        texturedCube1 = new TexturedCube(mainProgram, "position", "color");     // TODO: Remove later
+        // cube1 = new Cube(mainProgram, "position", "color");     // TODO: Remove later
+        texturedCube1 = new TexturedCube(mainProgram, "position");     // TODO: Remove later
 
-        cube1->translate(0.0f, 0.0f, 0.0f);
+        // cube1->translate(0.0f, 0.0f, 0.0f);
+        texturedCube1->scale(2.0f, 8.0f, 3.5f);
         texturedCube1->translate(2.0f, 2.0f, 2.0f);
     }
 }
@@ -44,6 +48,6 @@ void Cityscape::render(int width, int height)
 
     glm::mat4 projectionViewMatrix = projectionMatrix * viewMatrix;
 
-    cube1->render("world", "projectionView", projectionViewMatrix);     // TODO: Remove later
-    texturedCube1->render("world", "projectionView", projectionViewMatrix);     // TODO: Remove later
+    // cube1->render("world", "projectionView", projectionViewMatrix);     // TODO: Remove later
+    texturedCube1->render("world", "projectionView", "textureUniform", projectionViewMatrix);     // TODO: Remove later
 }

@@ -25,3 +25,13 @@ where the camera moves up and down vertically.
 - Added Spacebar input for camera ascend and Shift input for camera descend in firstPersonCamera classes
 - Fixed a bug where using the W and S keys will move towards and away the y-axis when looking directly towards the y or -y axes
 - Included getWindow() in W_App to get an application's window
+
+## version 1.2.0
+This version aims to create a textured cube.
+
+- Provided functionality for missing methods for Cube class in Cube.cpp
+- Added textures folder under cityscape > data
+- Added brick.png into the textures folder
+- Created TexturedCube class and texture shaders
+- Added depth tests to Cityscape classes
+- Modified sheep::structure to support textures

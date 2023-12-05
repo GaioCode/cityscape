@@ -1,83 +1,93 @@
 #include "texturedCube.h"
 
-static const sheep::VertexPosition3D cubeVertices[]
+static const sheep::VertexPosition5D cubeVertices[]
 {
     // Front
-	{ 0.0f, 0.0f, 1.0f },
-	{ 0.0f, 1.0f, 1.0f },
-	{ 1.0f, 1.0f, 1.0f },
-	{ 1.0f, 1.0f, 1.0f },
-	{ 1.0f, 0.0f, 1.0f },
-	{ 0.0f, 0.0f, 1.0f },
+	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
+	{ -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
+	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+	{  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
+	{  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
+	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+	
+	// { -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+	// { -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
+	// {  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
+	// {  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
+	// {  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
+	// { -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
 
 	// Back
-	{ 1.0f, 1.0f, 0.0f },
-	{ 0.0f, 1.0f, 0.0f },
-	{ 0.0f, 0.0f, 0.0f },
-	{ 0.0f, 0.0f, 0.0f },
-	{ 1.0f, 0.0f, 0.0f },
-	{ 1.0f, 1.0f, 0.0f },
+	{  0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
+	{ -0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
+	{ -0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+	{ -0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+	{  0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
+	{  0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
 
 	// Left
-	{ 0.0f, 1.0f, 0.0f },
-	{ 0.0f, 1.0f, 1.0f },
-	{ 0.0f, 0.0f, 1.0f },
-	{ 0.0f, 0.0f, 1.0f },
-	{ 0.0f, 0.0f, 0.0f },
-	{ 0.0f, 1.0f, 0.0f },
+	{ -0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
+	{ -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
+	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
+	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
+	{ -0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
+	{ -0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
 
 	// Right
-	{ 1.0f, 1.0f, 1.0f },
-	{ 1.0f, 1.0f, 0.0f },
-	{ 1.0f, 0.0f, 0.0f },
-	{ 1.0f, 0.0f, 0.0f },
-	{ 1.0f, 0.0f, 1.0f },
-	{ 1.0f, 1.0f, 1.0f },
+	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+	{  0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
+	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+	{  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
+	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
 
 	// Top
-	{ 0.0f, 1.0f, 1.0f },
-	{ 0.0f, 1.0f, 0.0f },
-	{ 1.0f, 1.0f, 0.0f },
-	{ 1.0f, 1.0f, 0.0f },
-	{ 1.0f, 1.0f, 1.0f },
-	{ 0.0f, 1.0f, 1.0f },
+	{ -0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+	{ -0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
+	{  0.5f,  0.5f,-0.5f,		1.0f, 1.0f },
+	{  0.5f,  0.5f,-0.5f,		1.0f, 1.0f },
+	{  0.5f,  0.5f, 0.5f,		1.0f, 0.0f },
+	{ -0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
 
 	// Bottom
-	{ 0.0f, 0.0f, 1.0f },
-	{ 1.0f, 0.0f, 1.0f },
-	{ 1.0f, 0.0f, 0.0f },
-	{ 1.0f, 0.0f, 0.0f },
-	{ 0.0f, 0.0f, 0.0f },
-	{ 0.0f, 0.0f, 1.0f },
+	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+	{  0.5f, -0.5f, 0.5f,		0.0f, 1.0f },
+	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+	{ -0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
+	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
 };
 
 static GLboolean isProgramGenerated = GL_FALSE;
 static wolf::Program* program = 0;
 static wolf::VertexDeclaration* vao = 0;     // VAO
 static wolf::VertexBuffer* positionVBO = 0;       // VBO
+static wolf::Texture* textureManager;
 
-static std::string colorUniform;       // TODO: Remove color later
 
-
-TexturedCube::TexturedCube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam)
+TexturedCube::TexturedCube(wolf::Program* programParam, const std::string& positionUniformParam)
 {
     if (!isProgramGenerated)
     {
         printf("Cube class not initialized. Initializing...\n");
         program = programParam;
-        colorUniform = colorUniformParam;
 
         // Create VBOs
 		
-        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPosition3D) * 36);
+        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPosition5D) * 36);
 
-        // Create VAO and assign VBOs to it
+        // Create VAO and assign VBOs and Texture Unit to it
 
         vao = new wolf::VertexDeclaration();
         vao->Begin();
+		vao->SetVertexBuffer(positionVBO);
         vao->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
-        vao->SetVertexBuffer(positionVBO);
+		vao->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
         vao->End();
+
+		// Create Texture
+
+		textureManager = wolf::TextureManager::CreateTexture("data/textures/brick.png");
 
         isProgramGenerated = GL_TRUE;
     }
@@ -91,6 +101,7 @@ TexturedCube::~TexturedCube()
     {
         printf("Destructing Cube class...\n");
         delete vao;
+		wolf::TextureManager::DestroyTexture(textureManager);
         wolf::BufferManager::DestroyBuffer(positionVBO);
         isProgramGenerated = GL_FALSE;
         printf("Cube Class destructed.");
@@ -103,8 +114,8 @@ void TexturedCube::update(float dt)
     this->time += dt;
 }
 
-void TexturedCube::render(const std::string& worldUniform, const std::string& projectionViewUniform, 
-const glm::mat4& projectionViewMatrix)
+void TexturedCube::render(const std::string& worldUniform, const std::string& projectionViewUniform,
+const std::string& textureUniform, const glm::mat4& projectionViewMatrix)
 {
 	// Convert object space to world space
 
@@ -119,37 +130,10 @@ const glm::mat4& projectionViewMatrix)
 	program->Bind();
 	program->SetUniform(projectionViewUniform, projectionViewMatrix);
 	program->SetUniform(worldUniform, worldMatrix);
+	program->SetUniform("texture", 0);		// TODO: Put "Claw" number as param
 
-	// TODO: Remove colors later
-	program->SetUniform(colorUniform, colorVector);
-
-	program->Bind();
-	glDrawArrays(GL_TRIANGLES, 0, 36);
-
-}
-
-void TexturedCube::render(const std::string& worldUniform, const std::string& viewUniform, const std::string& projectionUniform, 
-const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix)
-{
-	// Convert object space to world space
-
-    glm::mat4 worldMatrix =
-		glm::mat4(1.0f) *
-        glm::translate(glm::mat4(1.0f), translateVector) *
-		glm::scale(glm::mat4(1.0f), scaleVector) *
-		glm::rotate(glm::mat4(1.0f), rotateX, glm::vec3(1.0f, 0.0f, 0.0f)) *
-		glm::rotate(glm::mat4(1.0f), rotateY, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(glm::mat4(1.0f), rotateZ, glm::vec3(0.0f, 0.0f, 1.0f));
-
-	program->Bind();
-	program->SetUniform(projectionUniform, projectionMatrix);
-	program->SetUniform(viewUniform, viewMatrix);
-	program->SetUniform(worldUniform, worldMatrix);
-
-	// TODO: Remove colors later
-	program->SetUniform(colorUniform, colorVector);
-
-	program->Bind();
+	vao->Bind();
+	textureManager->Bind(0);
 	glDrawArrays(GL_TRIANGLES, 0, 36);
 
 }
@@ -171,9 +155,4 @@ void TexturedCube::rotate(GLfloat x, GLfloat y, GLfloat z)
 	this->rotateX = x;
 	this->rotateY = y;
 	this->rotateZ = z;
-};
-
-void TexturedCube::setColor(const glm::vec4& color)
-{
-	this->colorVector = color;
 };
