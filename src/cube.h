@@ -38,14 +38,14 @@ class Cube
         
         // Change cube RGB and Alpha value
         // param color - vec4 of red, green, blue, and alpha GLfloat values
-        void setColor(const glm::vec4& color);      // TODO: Remove later
+        void setColor(const glm::vec4& color);
 
     private:
         GLfloat rotateX = 0.0f;
         GLfloat rotateY = 0.0f;
         GLfloat rotateZ = 0.0f;
         glm::vec3 translateVector = glm::vec3(0.0f);
-        glm::vec4 colorVector = glm::vec4(0.0f);        // TODO: Remove later
+        glm::vec4 colorVector = glm::vec4(0.0f);
         glm::vec3 scaleVector = glm::vec3(1.0f);
         float time = 0;
 

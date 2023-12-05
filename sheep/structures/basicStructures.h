@@ -12,5 +12,11 @@ namespace sheep
     {
         GLfloat x, y, z;
     };
+
+    struct VertexPosition5D
+    {
+        GLfloat x, y, z;
+        GLfloat u, v;
+    };
 }
 
