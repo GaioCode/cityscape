@@ -16,3 +16,11 @@ engine created by Gordon Wood.
 - Use Spacebar to ascend and Left-Shift to descend.
 
 (This document is incomplete. More features and details will be added soon.)
+
+## Core Features
+
+## Extra Features Implemented
+
+## Challenges
+
+## Stretch Goals Unimplemented

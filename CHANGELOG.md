@@ -23,7 +23,8 @@ where the camera moves up and down vertically.
 - Added printCameraInfo() that shows debugging information in the console
 - Changed camera sprint key from LeftShift to Left-Control in firstPersonCamera classes
 - Added Spacebar input for camera ascend and Shift input for camera descend in firstPersonCamera classes
-- Fixed a bug where using the W and S keys will move towards and away the y-axis when looking directly towards the y or -y axes
+- Fixed a bug where using the W and S keys will move towards and away the y-axis when looking directly towards the y or
+  -y axes
 - Included getWindow() in W_App to get an application's window
 
 ## version 1.2.0
@@ -35,3 +36,15 @@ This version aims to create a textured cube.
 - Created TexturedCube class and texture shaders
 - Added depth tests to Cityscape classes
 - Modified sheep::structure to support textures
+
+## version 2.0.0
+The goal is to set up a class hierarchy that contains classes to generate buildings. A Building class will be an
+abstract class consisting of many differnet building models. This version aims to create just one model, called
+StandardBuilding. StandardBuilding will comprise of 3 different components: the base, middle, and height.
+
+- Created sheep.h to store all header files
+- Adjusted code to implement sheep.h where necessary
+- Created Building parent abstract lass to manage building generation
+- Created StandardBuilding child class as a sample building
+- Created BuildingHelper class to store methods to generate buildings
+- Fixed bugs and slight optimizations in Cube and TexturedCube classes

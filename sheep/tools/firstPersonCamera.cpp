@@ -183,12 +183,8 @@ namespace sheep
 
     glm::mat4 FirstPersonCamera::getViewMatrix()
     {
-
-        printCameraInfo();
-
         return glm::lookAt(this->cameraPositionVector, this->cameraPositionVector + this->cameraFrontVector, 
-        this->cameraUpVector);
-        
+        this->cameraUpVector);   
     }
 
     void FirstPersonCamera::printCameraInfo()

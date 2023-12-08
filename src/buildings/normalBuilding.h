@@ -1,19 +1,20 @@
 #pragma once
-#include "../wolf/wolf.h"
-#include "../samplefw/Sample.h"
-#include "../sheep/sheep.h"
+#include "../../wolf/wolf.h"
+#include "../../samplefw/Sample.h"
+#include "../../sheep/sheep.h"
 
-class TexturedCube
+class NormalBuilding
 {
     public:
-       TexturedCube(wolf::Program* programParam, const std::string& positionUniformParam);
+        NormalBuilding(wolf::Program* programParam, const std::string& positionUniformParam, 
+        std::vector<sheep::VertexPositionTexture5D> vertices);
 
-       ~TexturedCube();
+        ~NormalBuilding();
 
-       void update(float dt);
+        void update(float dt);
 
-       void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
-       const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
+        void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
+        const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
 
         // Set the cube to a new location in world space
         // param x - x value to translate

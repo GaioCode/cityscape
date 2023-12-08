@@ -1,9 +1,10 @@
 #pragma once
 #include "../wolf/wolf.h"
 #include "../samplefw/Sample.h"
-#include "../sheep/tools/firstPersonCamera.h"
+#include "../sheep/sheep.h"
 #include "cube.h"
 #include "texturedCube.h"
+#include "buildings/normalBuilding.h"
 
 // Objects
 #include "cube.h"
@@ -25,6 +26,8 @@ class Cityscape: public Sample
         GLfloat time = 0;
 
         // TODO: Remove later
-       //  Cube* cube1;
         TexturedCube* texturedCube1;
+        // NormalBuilding* normalBuilding1;
+        sheep::StandardBuilding* standardBuilding1;
+        
 };

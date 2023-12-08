@@ -1,61 +1,81 @@
 #include "texturedCube.h"
 
-static const sheep::VertexPosition5D cubeVertices[]
+// static const sheep::VertexPositionTexture5D cubeVertices[]
+// {
+// 	// Front
+// 	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+// 	{ -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
+// 	{  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
+// 	{  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
+// 	{  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
+// 	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+
+// 	// Back
+// 	{  0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
+// 	{ -0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
+// 	{ -0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+// 	{ -0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+// 	{  0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
+// 	{  0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
+
+// 	// Left
+// 	{ -0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
+// 	{ -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
+// 	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
+// 	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
+// 	{ -0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
+// 	{ -0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
+
+// 	// Right
+// 	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+// 	{  0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
+// 	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+// 	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+// 	{  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
+// 	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+
+// 	// Top
+// 	{ -0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+// 	{ -0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
+// 	{  0.5f,  0.5f,-0.5f,		1.0f, 1.0f },
+// 	{  0.5f,  0.5f,-0.5f,		1.0f, 1.0f },
+// 	{  0.5f,  0.5f, 0.5f,		1.0f, 0.0f },
+// 	{ -0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
+
+// 	// Bottom
+// 	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+// 	{  0.5f, -0.5f, 0.5f,		0.0f, 1.0f },
+// 	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+// 	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
+// 	{ -0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
+// 	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+// };
+
+static const sheep::VertexPositionTexture5D cubeVertices[]
 {
-    // Front
-	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
-	{ -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
-	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
-	{  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
-	{  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
-	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
-	
-	// { -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
-	// { -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
-	// {  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
-	// {  0.5f,  0.5f, 0.5f,		1.0f, 1.0f },
-	// {  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
-	// { -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
-
-	// Back
-	{  0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
-	{ -0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
-	{ -0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
-	{ -0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
-	{  0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
-	{  0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
-
-	// Left
-	{ -0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
-	{ -0.5f,  0.5f, 0.5f,		0.0f, 1.0f },
-	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
-	{ -0.5f, -0.5f, 0.5f,		1.0f, 1.0f },
-	{ -0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
-	{ -0.5f,  0.5f,-0.5f,		0.0f, 0.0f },
-
-	// Right
-	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
-	{  0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
-	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
-	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
-	{  0.5f, -0.5f, 0.5f,		1.0f, 0.0f },
-	{  0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
-
-	// Top
-	{ -0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
-	{ -0.5f,  0.5f,-0.5f,		0.0f, 1.0f },
-	{  0.5f,  0.5f,-0.5f,		1.0f, 1.0f },
-	{  0.5f,  0.5f,-0.5f,		1.0f, 1.0f },
-	{  0.5f,  0.5f, 0.5f,		1.0f, 0.0f },
-	{ -0.5f,  0.5f, 0.5f,		0.0f, 0.0f },
-
-	// Bottom
-	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
-	{  0.5f, -0.5f, 0.5f,		0.0f, 1.0f },
-	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
-	{  0.5f, -0.5f,-0.5f,		1.0f, 1.0f },
-	{ -0.5f, -0.5f,-0.5f,		1.0f, 0.0f },
-	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
+    // Front face
+    {-0.5, -0.5,  0.5,  0.0, 0.0}, { 0.5, -0.5,  0.5,  1.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 1.0},
+    {-0.5, -0.5,  0.5,  0.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 1.0}, {-0.5,  0.5,  0.5,  0.0, 1.0},
+    
+    // Back face
+    {-0.5, -0.5, -0.5,  1.0, 0.0}, {-0.5,  0.5, -0.5,  1.0, 1.0}, { 0.5,  0.5, -0.5,  0.0, 1.0},
+    {-0.5, -0.5, -0.5,  1.0, 0.0}, { 0.5,  0.5, -0.5,  0.0, 1.0}, { 0.5, -0.5, -0.5,  0.0, 0.0},
+    
+    // Top face
+    {-0.5,  0.5, -0.5,  0.0, 1.0}, {-0.5,  0.5,  0.5,  0.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 0.0},
+    {-0.5,  0.5, -0.5,  0.0, 1.0}, { 0.5,  0.5,  0.5,  1.0, 0.0}, { 0.5,  0.5, -0.5,  1.0, 1.0},
+    
+    // Bottom face
+    {-0.5, -0.5, -0.5,  0.0, 0.0}, { 0.5, -0.5, -0.5,  1.0, 0.0}, { 0.5, -0.5,  0.5,  1.0, 1.0},
+    {-0.5, -0.5, -0.5,  0.0, 0.0}, { 0.5, -0.5,  0.5,  1.0, 1.0}, {-0.5, -0.5,  0.5,  0.0, 1.0},
+    
+    // Right face
+    { 0.5, -0.5, -0.5,  0.0, 0.0}, { 0.5,  0.5, -0.5,  1.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 1.0},
+    { 0.5, -0.5, -0.5,  0.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 1.0}, { 0.5, -0.5,  0.5,  0.0, 1.0},
+    
+    // Left face
+    {-0.5, -0.5, -0.5,  1.0, 0.0}, {-0.5, -0.5,  0.5,  0.0, 0.0}, {-0.5,  0.5,  0.5,  0.0, 1.0},
+    {-0.5, -0.5, -0.5,  1.0, 0.0}, {-0.5,  0.5,  0.5,  0.0, 1.0}, {-0.5,  0.5, -0.5,  1.0, 1.0},
 };
 
 static GLboolean isProgramGenerated = GL_FALSE;
@@ -69,12 +89,12 @@ TexturedCube::TexturedCube(wolf::Program* programParam, const std::string& posit
 {
     if (!isProgramGenerated)
     {
-        printf("Cube class not initialized. Initializing...\n");
+        printf("TexturedCube class not initialized. Initializing...\n");
         program = programParam;
 
         // Create VBOs
 		
-        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPosition5D) * 36);
+        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPositionTexture5D) * 36);
 
         // Create VAO and assign VBOs and Texture Unit to it
 
@@ -91,7 +111,7 @@ TexturedCube::TexturedCube(wolf::Program* programParam, const std::string& posit
 
         isProgramGenerated = GL_TRUE;
     }
-    printf("Successfully initialzed Cube class.\n");
+    printf("Successfully initialzed TexturedCube class.\n");
     
 }
 
@@ -99,12 +119,15 @@ TexturedCube::~TexturedCube()
 {
     if (isProgramGenerated)
     {
-        printf("Destructing Cube class...\n");
-        delete vao;
+        printf("Destructing TexturedCube class...\n");
 		wolf::TextureManager::DestroyTexture(textureManager);
         wolf::BufferManager::DestroyBuffer(positionVBO);
+		delete vao;
+		program = 0;
+		positionVBO = 0;
+		textureManager = nullptr;
         isProgramGenerated = GL_FALSE;
-        printf("Cube Class destructed.");
+        printf("TexturedCube Class destructed.");
     }
     
 }
@@ -119,18 +142,17 @@ const std::string& textureUniform, const glm::mat4& projectionViewMatrix)
 {
 	// Convert object space to world space
 
-    glm::mat4 worldMatrix =
-		glm::mat4(1.0f) *
+    glm::mat4 worldMatrix = 
         glm::translate(glm::mat4(1.0f), translateVector) *
-		glm::scale(glm::mat4(1.0f), scaleVector) *
-		glm::rotate(glm::mat4(1.0f), rotateX, glm::vec3(1.0f, 0.0f, 0.0f)) *
-		glm::rotate(glm::mat4(1.0f), rotateY, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(glm::mat4(1.0f), rotateZ, glm::vec3(0.0f, 0.0f, 1.0f));
+        glm::rotate(glm::mat4(1.0f), rotateZ, glm::vec3(0.0f, 0.0f, 1.0f)) *
+        glm::rotate(glm::mat4(1.0f), rotateY, glm::vec3(0.0f, 1.0f, 0.0f)) *
+        glm::rotate(glm::mat4(1.0f), rotateX, glm::vec3(1.0f, 0.0f, 0.0f)) *
+        glm::scale(glm::mat4(1.0f), scaleVector);
 
-	program->Bind();
 	program->SetUniform(projectionViewUniform, projectionViewMatrix);
 	program->SetUniform(worldUniform, worldMatrix);
-	program->SetUniform("texture", 0);		// TODO: Put "Claw" number as param
+	program->SetUniform("tex", 0);		// TODO: Put "Claw" number as param
+    program->Bind();        // Bind here to fix shifting
 
 	vao->Bind();
 	textureManager->Bind(0);

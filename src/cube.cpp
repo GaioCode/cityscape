@@ -108,17 +108,17 @@ const glm::mat4& projectionViewMatrix)
 {
 	// Convert object space to world space
 
-    glm::mat4 worldMatrix =
-		glm::mat4(1.0f) *
+    glm::mat4 worldMatrix = 
         glm::translate(glm::mat4(1.0f), translateVector) *
-		glm::scale(glm::mat4(1.0f), scaleVector) *
-		glm::rotate(glm::mat4(1.0f), rotateX, glm::vec3(1.0f, 0.0f, 0.0f)) *
-		glm::rotate(glm::mat4(1.0f), rotateY, glm::vec3(0.0f, 1.0f, 0.0f)) *
-		glm::rotate(glm::mat4(1.0f), rotateZ, glm::vec3(0.0f, 0.0f, 1.0f));
+        glm::rotate(glm::mat4(1.0f), rotateZ, glm::vec3(0.0f, 0.0f, 1.0f)) *
+        glm::rotate(glm::mat4(1.0f), rotateY, glm::vec3(0.0f, 1.0f, 0.0f)) *
+        glm::rotate(glm::mat4(1.0f), rotateX, glm::vec3(1.0f, 0.0f, 0.0f)) *
+        glm::scale(glm::mat4(1.0f), scaleVector);
 
-	program->Bind();
 	program->SetUniform(projectionViewUniform, projectionViewMatrix);
 	program->SetUniform(worldUniform, worldMatrix);
+    program->Bind();        // Bind here to fix shifting
+
 
 	program->SetUniform(colorUniform, colorVector);
 
