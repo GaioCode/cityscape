@@ -16,6 +16,6 @@ namespace sheep
             const std::string& textureUniform, const glm::mat4& projectionViewMatrix) override;
 
         private:
-            StandardCube* standardCube1;
+            std::vector<StandardCube*> standardCubes;
     };
 }

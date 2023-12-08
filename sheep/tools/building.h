@@ -18,19 +18,19 @@ namespace sheep
             virtual void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
                                 const std::string& textureUniform, const glm::mat4& projectionViewMatrix) = 0;
 
-            // Set the cube to a new location in world space
+            // Set the building to a new location in world space
             // param x - x value to translate
             // param y - y value to translate
             // param z - z value to translate
             void translate(GLfloat x, GLfloat y, GLfloat z);
 
-            // Change the cube's side length to change the entire cube's size
+            // Change the building's side length to change the entire cube's size
             // param x - x value to scale
             // param y - y value to scale
             // param z - z value to scale
             void scale(GLfloat x, GLfloat y, GLfloat z);
 
-            // Rotate the cube by its angle and decide whether to rotate in x, y, and/or z
+            // Rotate the building by its angle and decide whether to rotate in x, y, and/or z
             // param x - Rotate x coordinate in radians (float).
             // param y - Rotate y coordinate in radians (float).
             // param z - Rotate z coordinate in radians (float).

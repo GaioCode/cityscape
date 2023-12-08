@@ -19,18 +19,18 @@ namespace sheep
 
     void Building::translate(GLfloat x, GLfloat y, GLfloat z)
     {
-        this->translateVector = glm::vec3(x, y, z);
+        translateVector = glm::vec3(x, y, z);
     };
 
     void Building::scale(GLfloat x, GLfloat y, GLfloat z)
     {
-        this->scaleVector = glm::vec3(x, y, z);
+        scaleVector = glm::vec3(x, y, z);
     };
 
     void Building::rotate(GLfloat x, GLfloat y, GLfloat z)
     {
-        this->rotateX = x;
-        this->rotateY = y;
-        this->rotateZ = z;
+        rotateX = x;
+        rotateY = y;
+        rotateZ = z;
     };
 }

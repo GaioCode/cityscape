@@ -26,8 +26,6 @@ class Cityscape: public Sample
         GLfloat time = 0;
 
         // TODO: Remove later
-        TexturedCube* texturedCube1;
-        // NormalBuilding* normalBuilding1;
         sheep::StandardBuilding* standardBuilding1;
         
 };

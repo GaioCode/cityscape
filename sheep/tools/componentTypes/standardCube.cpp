@@ -2,33 +2,55 @@
 
 namespace sheep
 {
-    const int NUM_VERTICES = 36;
+    static const int NUM_VERTICES = 36;
+    wolf::VertexBuffer* StandardCube::positionVBO = nullptr;
+    wolf::Texture* StandardCube::textureManager = nullptr;
+    int StandardCube::numChildComponents = 0;
 
     StandardCube::StandardCube(wolf::Program* programParam, const std::string& positionUniformParam)
-        : Component(programParam, positionUniformParam), positionVBO(nullptr), textureManager(nullptr)
+        : Component(programParam, positionUniformParam)
     {
-        // Add data to positionVBO
+        numChildComponents++;
 
-        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices.data(), sizeof(VertexPositionTexture5D)
-            * NUM_VERTICES);
+        if (numChildComponents == 1)
+        {
+            printf("StandardCube class not initialized. Initializing...\n");
 
-        // Use parent VAO and assign VBOs and Texture Unit to it
+            // Add data to positionVBO
 
-        vao->Begin();
-        vao->SetVertexBuffer(positionVBO);
-        vao->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
-        vao->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
-        vao->End();
+            positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices.data(), sizeof(VertexPositionTexture5D)
+                * NUM_VERTICES);
 
-        // Create Texture for this specific child class
+            // Use parent VAO and assign VBOs and Texture Unit to it
 
-        textureManager = wolf::TextureManager::CreateTexture("data/textures/brick.png");
+            vao->Begin();
+            vao->SetVertexBuffer(positionVBO);
+            vao->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
+            vao->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
+            vao->End();
+
+            // Create Texture for this specific child class
+
+            textureManager = wolf::TextureManager::CreateTexture("data/textures/brick.png");
+
+            printf("Successfully initialzed StandardCube class.\n");
+        }
     }
 
     StandardCube::~StandardCube()
     {
+        numChildComponents--;
+
+        if (numChildComponents == 0)
+        {
+            printf("Destructing StandardCube class...\n");
+
             wolf::TextureManager::DestroyTexture(textureManager);
             wolf::BufferManager::DestroyBuffer(positionVBO);
+
+            printf("StandardCube class destructed.\n");
+
+        }
     }
 
     void StandardCube::render(const std::string& worldUniform, const std::string& projectionViewUniform,
@@ -37,7 +59,7 @@ namespace sheep
         Component::render(worldUniform, projectionViewUniform, projectionViewMatrix);
 
         // Set texture uniform
-        program->SetUniform("tex", 0);		// TODO: Take in from parameter instead of hardcoding
+        program->SetUniform("tex", 0);
 
         program->Bind();        // Bind here to fix shifting (wolf issue)
 

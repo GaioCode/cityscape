@@ -2,39 +2,50 @@
 
 namespace sheep
 {
+    const int NUM_STANDARD_CUBES = 3;
+    std::vector<float> initialYOffsets;
+
     StandardBuilding::StandardBuilding(wolf::Program* programParam, const std::string& positionUniformParam)
-        : Building(programParam, positionUniformParam), standardCube1(nullptr)
+        : Building(programParam, positionUniformParam)
     {
-        // For every component generated, raise this value by the component's height
-        // float yOffset = 0.0f;
-        
-        // const float COMPONENT_WIDTH = 1.0f;
-        // const float COMPONENT_HEIGHT = 1.0f;
 
-        // for (int i = 0; i < 3; ++i)
-        // {
+        float yOffset = 0.0f;
 
-        //     standardCubeVector[i].translate(0.0f, yOffset, 0.0f);
+        for (int i = 0; i < NUM_STANDARD_CUBES; i++)
+        {
 
-        //     yOffset += 1.0f;
-        // }
+            standardCubes.push_back(new StandardCube(programParam, positionUniformParam));
 
-        standardCube1 = new StandardCube(programParam, positionUniformParam);
+            initialYOffsets.push_back(yOffset);
+
+            // For every component generated, raise this value by the component's height
+            yOffset += 1.0f;
+
+            printf("%f\n", yOffset);
+        }
 
     }
 
     StandardBuilding::~StandardBuilding()
     {
-        delete standardCube1;
+        for (auto* cube : standardCubes)
+        {
+            delete cube;
+        }
     }
 
     void StandardBuilding::render(const std::string& worldUniform, const std::string& projectionViewUniform,
     const std::string& textureUniform, const glm::mat4& projectionViewMatrix)
     {
-        standardCube1->scale(scaleVector.x, scaleVector.y, scaleVector.z);
-        standardCube1->translate(translateVector.x, translateVector.y, translateVector.z);
-        standardCube1->rotate(rotateX, rotateY, rotateZ);
-
-        standardCube1->render(worldUniform, projectionViewUniform, textureUniform, projectionViewMatrix);
+        for (size_t i = 0; i < standardCubes.size(); i++)
+        {
+            auto* cube = standardCubes[i];
+            cube->scale(scaleVector.x, scaleVector.y, scaleVector.z);
+            cube->rotate(rotateX, rotateY, rotateZ);
+            cube->translate(translateVector.x, translateVector.y + initialYOffsets[i], translateVector.z);
+            
+            // TODO: We want to add translate values, so we need the cube's ori values and add new one
+            cube->render(worldUniform, projectionViewUniform, textureUniform, projectionViewMatrix);
+        }
     }
 }
