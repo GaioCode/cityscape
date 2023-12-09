@@ -4,6 +4,7 @@ namespace sheep
 {
     static const int NUM_VERTICES = 36;
     wolf::VertexBuffer* StandardCube::positionVBO = nullptr;
+    wolf::IndexBuffer* StandardCube::indexBuffer = nullptr;
     wolf::Texture* StandardCube::textureManager = nullptr;
     int StandardCube::numChildComponents = 0;
 
@@ -18,8 +19,11 @@ namespace sheep
 
             // Add data to positionVBO
 
-            positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices.data(), sizeof(VertexPositionTexture5D)
+            positionVBO = wolf::BufferManager::CreateVertexBuffer(uniqueCubeVertices.data(), sizeof(VertexPositionTexture5D)
                 * NUM_VERTICES);
+
+            // Create Index Buffer Object (IBO)
+            indexBuffer = wolf::BufferManager::CreateIndexBuffer(cubeIndices.data(), cubeIndices.size());
 
             // Use parent VAO and assign VBOs and Texture Unit to it
 
@@ -65,6 +69,8 @@ namespace sheep
 
         vao->Bind();
         textureManager->Bind(0);
-        glDrawArrays(GL_TRIANGLES, 0, NUM_VERTICES);
+        indexBuffer->Bind();
+        // glDrawArrays(GL_TRIANGLES, 0, NUM_VERTICES);
+        glDrawElements(GL_TRIANGLES, cubeIndices.size(), GL_UNSIGNED_SHORT, 0);
     }
 }

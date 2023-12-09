@@ -2,7 +2,7 @@
 
 namespace sheep
 {
-    const int NUM_STANDARD_CUBES = 3;
+    const int NUM_STANDARD_CUBES = 1;
     std::vector<float> initialYOffsets;
 
     StandardBuilding::StandardBuilding(wolf::Program* programParam, const std::string& positionUniformParam)
@@ -39,12 +39,13 @@ namespace sheep
     {
         for (size_t i = 0; i < standardCubes.size(); i++)
         {
+            // Perform any translations or transformations of the building to all objects
             auto* cube = standardCubes[i];
             cube->scale(scaleVector.x, scaleVector.y, scaleVector.z);
             cube->rotate(rotateX, rotateY, rotateZ);
             cube->translate(translateVector.x, translateVector.y + initialYOffsets[i], translateVector.z);
-            
-            // TODO: We want to add translate values, so we need the cube's ori values and add new one
+
+            // Render objects
             cube->render(worldUniform, projectionViewUniform, textureUniform, projectionViewMatrix);
         }
     }

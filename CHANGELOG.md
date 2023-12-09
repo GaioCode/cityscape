@@ -44,7 +44,8 @@ StandardBuilding. StandardBuilding will comprise of 3 different components: the 
 
 - Created sheep.h to store all header files
 - Adjusted code to implement sheep.h where necessary
-- Created Building parent abstract lass to manage building generation
-- Created StandardBuilding child class as a sample building
-- Created BuildingHelper class to store methods to generate buildings
-- Fixed bugs and slight optimizations in Cube and TexturedCube classes
+- Added polygonStructures.h to store vertices of common polygons
+- Created Building parent class and StandardBuilding child class
+- Created Component parent class and StandardComponent child class
+- Created ComponentHelper class to store methods to generate components
+- Fixed bugs and optimized code across multiple classes

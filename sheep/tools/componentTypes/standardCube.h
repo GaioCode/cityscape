@@ -15,6 +15,7 @@ namespace sheep
 
         private:
             static wolf::VertexBuffer* positionVBO;
+            static wolf::IndexBuffer* indexBuffer;
             static wolf::Texture* textureManager;
             static int numChildComponents;
     };
