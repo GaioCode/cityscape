@@ -12,6 +12,3 @@
 
 // Building Types
 #include "tools/buildingTypes/standardBuilding.h"
-
-// Component Types
-#include "tools/componentTypes/standardCube.h"

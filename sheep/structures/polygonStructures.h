@@ -31,7 +31,7 @@ namespace sheep
         {-0.5, -0.5, -0.5,  1.0, 0.0}, {-0.5,  0.5,  0.5,  0.0, 1.0}, {-0.5,  0.5, -0.5,  1.0, 1.0},
     };
 
-    const std::vector<VertexPositionTexture5D> uniqueCubeVertices = {
+    const std::vector<VertexPositionTexture5D> cubeUniqueVertices = {
         // Front face
         {-0.5, -0.5,  0.5,  0.0, 0.0}, { 0.5, -0.5,  0.5,  1.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 1.0}, {-0.5,  0.5,  0.5,  0.0, 1.0},
         // Back face

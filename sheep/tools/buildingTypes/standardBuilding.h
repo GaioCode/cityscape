@@ -1,6 +1,5 @@
 #pragma once
 #include "../building.h"
-#include "../componentTypes/standardCube.h"
 
 namespace sheep
 {
@@ -13,9 +12,13 @@ namespace sheep
             ~StandardBuilding() override;
 
             void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
-            const std::string& textureUniform, const glm::mat4& projectionViewMatrix) override;
+                        const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
 
         private:
-            std::vector<StandardCube*> standardCubes;
+            static wolf::VertexBuffer* positionVBO;
+            static wolf::IndexBuffer* indexBuffer;
+            static wolf::Texture* textureManager;
+
+            static int numStandardBuildings;
     };
 }

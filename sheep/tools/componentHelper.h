@@ -1,5 +1,4 @@
 #pragma once
-#include "../../wolf/wolf.h"
 #include "../structures/basicStructures.h"
 #include "../structures/polygonStructures.h"
 #include <vector>

@@ -1,9 +1,8 @@
 #pragma once
 #include "../../wolf/wolf.h"
 #include "../../samplefw/Sample.h"
-#include "../structures/basicStructures.h"
+#include "component.h"
 #include <vector>
-#include <stdexcept>
 
 namespace sheep
 {
@@ -15,8 +14,8 @@ namespace sheep
 
             virtual ~Building() = 0;
 
-            virtual void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
-                                const std::string& textureUniform, const glm::mat4& projectionViewMatrix) = 0;
+            void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
+                        const glm::mat4& projectionViewMatrix);
 
             // Set the building to a new location in world space
             // param x - x value to translate
@@ -40,11 +39,14 @@ namespace sheep
             GLfloat rotateX, rotateY, rotateZ;
             glm::vec3 translateVector, scaleVector;
 
-            // Each building will have a unique ID
-            int buildingID;
+            static wolf::Program* program;
+            static wolf::VertexDeclaration* vao;
+
+            std::vector<VertexPositionTexture5D> buildingVertices;
+            std::vector<unsigned short> buildingIndices;
 
         private:
-            // Increase counter for each new building created. This counter does not decrease if a building is deleted.
-            static int buildingIDCount;
+
+            static int numBuildings;
     };
 }

@@ -27,5 +27,6 @@ class Cityscape: public Sample
 
         // TODO: Remove later
         sheep::StandardBuilding* standardBuilding1;
+
         
 };
