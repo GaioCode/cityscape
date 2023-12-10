@@ -15,9 +15,6 @@ namespace sheep
                         const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
 
         private:
-            static wolf::VertexBuffer* positionVBO;
-            static wolf::IndexBuffer* indexBuffer;
-            static wolf::Texture* textureManager;
 
             static int numStandardBuildings;
     };

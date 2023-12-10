@@ -4,6 +4,11 @@
 #include "component.h"
 #include <vector>
 
+// TODO: Put this in a proper place later
+#include <stdio.h>      /* printf, scanf, puts, NULL */
+#include <stdlib.h>     /* srand, rand */
+#include <time.h>       /* time */
+
 namespace sheep
 {
     class Building
@@ -15,7 +20,13 @@ namespace sheep
             virtual ~Building() = 0;
 
             void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
-                        const glm::mat4& projectionViewMatrix);
+                        const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
+
+            // Create VBO and Index Buffer Object
+            void createBuffers();
+
+            // Update vertex and index buffers
+            // void updateBuffers();
 
             // Set the building to a new location in world space
             // param x - x value to translate
@@ -35,18 +46,30 @@ namespace sheep
             // param z - Rotate z coordinate in radians (float).
             void rotate(GLfloat x, GLfloat y, GLfloat z);
 
+            // Debugging tool to print contents of vertex and index data to console
+            void printBufferContents() const; 
+
+            // Debugging tool to print size of vertex and index data to console
+            void printBufferSize() const;
+
         protected:
             GLfloat rotateX, rotateY, rotateZ;
             glm::vec3 translateVector, scaleVector;
 
             static wolf::Program* program;
             static wolf::VertexDeclaration* vao;
+            static wolf::Texture* textureManager;
+
+            static wolf::VertexBuffer* positionVBO;
+            static wolf::IndexBuffer* indexBuffer;
 
             std::vector<VertexPositionTexture5D> buildingVertices;
             std::vector<unsigned short> buildingIndices;
 
+            static int numBuildings;
+
         private:
 
-            static int numBuildings;
+            
     };
 }

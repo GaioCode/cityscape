@@ -26,7 +26,6 @@ class Cityscape: public Sample
         GLfloat time = 0;
 
         // TODO: Remove later
-        sheep::StandardBuilding* standardBuilding1;
+        std::vector<sheep::StandardBuilding*> standardBuildings;
 
-        
 };

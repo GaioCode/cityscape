@@ -21,7 +21,7 @@ namespace sheep
             glm::mat4 getViewMatrix();
             
             // Debugging tool to print camera information in console
-            void printCameraInfo();
+            void printCameraInfo() const;
 
         private:
             void updateCameraDirection();

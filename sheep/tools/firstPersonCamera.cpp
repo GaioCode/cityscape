@@ -187,7 +187,7 @@ namespace sheep
         this->cameraUpVector);   
     }
 
-    void FirstPersonCamera::printCameraInfo()
+    void FirstPersonCamera::printCameraInfo() const
     {
         std::cout << "Camera Position: " << glm::to_string(this->cameraPositionVector);
         std::cout << ", Camera Front: " << glm::to_string(this->cameraFrontVector);

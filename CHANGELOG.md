@@ -39,13 +39,16 @@ This version aims to create a textured cube.
 
 ## version 2.0.0
 The goal is to set up a class hierarchy that contains classes to generate buildings. A Building class will be an
-abstract class consisting of many differnet building models. This version aims to create just one model, called
+abstract class consisting of many differnet components. This version aims to create just one building model, called 
 StandardBuilding. StandardBuilding will comprise of 3 different components: the base, middle, and height.
 
 - Created sheep.h to store all header files
 - Adjusted code to implement sheep.h where necessary
 - Added polygonStructures.h to store vertices of common polygons
 - Created Building parent class and StandardBuilding child class
-- Created Component parent class and StandardComponent child class
+- Created Component class
 - Created ComponentHelper class to store methods to generate components
 - Fixed bugs and optimized code across multiple classes
+- Modified W_VertexBuffer, W_IndexBuffer, and W_BufferManager classes to support updating existing VBOs and Index
+  Buffers
+- Implemented randomization to generate random buildings

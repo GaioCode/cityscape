@@ -2,14 +2,21 @@
 #include <iostream>
 #include <glm/gtx/string_cast.hpp>
 
+
 Cityscape::~Cityscape()
 {
     printf("Destructing Cityscape World...\n");
-    wolf::ProgramManager::DestroyProgram(mainProgram);
-    printf("Cityscape World destructed successfully.\n");
 
-    // TODO: Remove later
-    delete standardBuilding1;
+    wolf::ProgramManager::DestroyProgram(mainProgram);
+
+    delete camera;
+
+    for (auto building : standardBuildings)
+    {
+        delete building;
+    }
+
+    printf("Cityscape World destructed successfully.\n");
 }
 
 void Cityscape::init()
@@ -23,9 +30,25 @@ void Cityscape::init()
         this->camera = new sheep::FirstPersonCamera(m_pApp);
 
         // Render objects
+
+        float xOffset = 0.0f;
+        float zOffset = 0.0f;
+        int count = 0;
         
         // TODO: Remove later
-        standardBuilding1 = new sheep::StandardBuilding(mainProgram, "position");
+        for (int i = 0; i < 4; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                standardBuildings.push_back(new sheep::StandardBuilding(mainProgram, "position"));
+                standardBuildings[count]->translate(xOffset, 0.0f, zOffset);
+
+                zOffset += 2.0f;
+                count++;
+            }
+            zOffset = 0.0f;
+            xOffset += 2.0f;
+        }
     }
 }
 
@@ -46,5 +69,8 @@ void Cityscape::render(int width, int height)
     glm::mat4 projectionViewMatrix = projectionMatrix * viewMatrix;
 
     // TODO: Remove later
-    standardBuilding1->render("world", "projectionView", "textureUniform", projectionViewMatrix);
+    for (auto building : standardBuildings)
+    {
+        building->render("world", "projectionView", "textureUniform", projectionViewMatrix);
+    }
 }
