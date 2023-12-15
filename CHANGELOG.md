@@ -52,3 +52,12 @@ StandardBuilding. StandardBuilding will comprise of 3 different components: the 
 - Modified W_VertexBuffer, W_IndexBuffer, and W_BufferManager classes to support updating existing VBOs and Index
   Buffers
 - Implemented randomization to generate random buildings
+
+## version 2.1.0
+
+- Added regenerate() in Cityscape class to regenerate a new random world
+- Added transform() in ComponentHelper class to transform individual vertices
+- Created randomNumberGenerator class and implemented to Buildings for random generation
+- Created n-sided polygon generator for vertices and indices
+- Set textures to nearest filtering
+- Fixed a bug where all buildings are generated using the same VBO data

@@ -12,7 +12,7 @@ const int VERTICES_PER_SIDE = 4;
 // TODO: Give NormalBuilding static ID int tracker
 
 NormalBuilding::NormalBuilding(wolf::Program* programParam, const std::string& positionUniformParam, 
-std::vector<sheep::VertexPositionTexture5D> vertices)
+std::vector<sheep::VertexPosTex5D> vertices)
 {
     if (!isProgramGenerated)
     {
@@ -21,9 +21,9 @@ std::vector<sheep::VertexPositionTexture5D> vertices)
 
         // Create VBOs
 
-        sheep::VertexPositionTexture5D* array = vertices.data();
+        sheep::VertexPosTex5D* array = vertices.data();
 		
-        positionVBO = wolf::BufferManager::CreateVertexBuffer(array, sizeof(sheep::VertexPositionTexture5D) * VERTICES_PER_SIDE
+        positionVBO = wolf::BufferManager::CreateVertexBuffer(array, sizeof(sheep::VertexPosTex5D) * VERTICES_PER_SIDE
          * BUILDING_SIDES);
 
         // Create VAO and assign VBOs and Texture Unit to it

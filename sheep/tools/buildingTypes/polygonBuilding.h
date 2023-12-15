@@ -3,13 +3,13 @@
 
 namespace sheep
 {
-    class StandardBuilding : public Building
+    class PolygonBuilding : public Building
     {
         public:
 
-            StandardBuilding(wolf::Program* programParam, const std::string& positionUniformParam);
+            PolygonBuilding(wolf::Program* programParam, const std::string& positionUniformParam, int height, int sides);
 
-            ~StandardBuilding() override;
+            ~PolygonBuilding() override;
 
             void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
                         const std::string& textureUniform, const glm::mat4& projectionViewMatrix);

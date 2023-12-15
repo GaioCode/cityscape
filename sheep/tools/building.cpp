@@ -3,54 +3,28 @@
 namespace sheep
 {
     
-
     wolf::Program* Building::program = nullptr;
-    wolf::VertexDeclaration* Building::vao = nullptr;
     wolf::Texture* Building::textureManager = nullptr;
-    wolf::VertexBuffer* Building::positionVBO = nullptr;
-    wolf::IndexBuffer* Building::indexBuffer = nullptr;
-
-    int Building::numBuildings = 0;
 
     Building::Building(wolf::Program* programParam, const std::string& positionUniformParam)
-        : rotateX(0.0f), rotateY(0.0f), rotateZ(0.0f), scaleVector(glm::vec3(1.0f)), translateVector(glm::vec3(0.0f))
+        : rotateX(0.0f), rotateY(0.0f), rotateZ(0.0f), scaleVector(glm::vec3(1.0f)), translateVector(glm::vec3(0.0f)),
+          positionVBO(nullptr), indexBuffer(nullptr), vao(nullptr)
     {
-
-        numBuildings++;
-
-        if (numBuildings == 1)
-        {
-            printf("Building class not initialized. Initializing...\n");
-
-            // TODO: Migrate this to a buildingManager class so we can perform randomization there
-            srand(time(NULL));
 
             program = programParam;
             vao = new wolf::VertexDeclaration();
 
-            textureManager = wolf::TextureManager::CreateTexture("data/textures/brick.png");
-
-            printf("Successfully initialzed Building class.\n");
-        }
-
+            textureManager = wolf::TextureManager::CreateTexture("data/textures/testing1.png");
+            textureManager->SetFilterMode(wolf::Texture::FM_Nearest, wolf::Texture::FM_Nearest);
     }
 
     // Pure virtual destructor
     Building::~Building()
     {
-        numBuildings--;
-
-        if (numBuildings == 0)
-        {
-            printf("Destructing Building class...\n");
-            
             delete vao;
             wolf::BufferManager::DestroyBuffer(positionVBO);
             wolf::BufferManager::DestroyBuffer(indexBuffer);
             wolf::TextureManager::DestroyTexture(textureManager);
-
-            printf("Building class destructed.\n");
-        }
     }
 
     void Building::render(const std::string& worldUniform, const std::string& projectionViewUniform, 
@@ -94,24 +68,21 @@ namespace sheep
 
     void Building::createBuffers()
     {
-        if (numBuildings == 1)
-        {
-            // Add data to positionVBO
+        // Add data to positionVBO
 
-            positionVBO = wolf::BufferManager::CreateVertexBuffer(buildingVertices.data(), sizeof(VertexPositionTexture5D)
-                * buildingVertices.size());
+        positionVBO = wolf::BufferManager::CreateVertexBuffer(buildingVertices.data(), sizeof(VertexPosTex5D)
+            * buildingVertices.size());
 
-            // Create Index Buffer Object (IBO)
-            indexBuffer = wolf::BufferManager::CreateIndexBuffer(buildingIndices.data(), buildingIndices.size());
+        // Create Index Buffer Object (IBO)
+        indexBuffer = wolf::BufferManager::CreateIndexBuffer(buildingIndices.data(), buildingIndices.size());
 
-            // Use parent VAO and assign VBOs and Texture Unit to it
+        // Use parent VAO and assign VBOs and Texture Unit to it
 
-            vao->Begin();
-            vao->SetVertexBuffer(positionVBO);
-            vao->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
-            vao->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
-            vao->End();
-        }
+        vao->Begin();
+        vao->SetVertexBuffer(positionVBO);
+        vao->AppendAttribute(wolf::AT_Position, 3, wolf::CT_Float);
+        vao->AppendAttribute(wolf::AT_TexCoord1, 2, wolf::CT_Float);
+        vao->End();
     }
 
     void Building::printBufferContents() const
@@ -134,7 +105,7 @@ namespace sheep
     void Building::printBufferSize() const
     {
         printf("Building Vertices size: %lu\n", buildingVertices.size());
-        printf("Building Vertices total bytes: %lu\n", sizeof(VertexPositionTexture5D) * buildingVertices.size());
+        printf("Building Vertices total bytes: %lu\n", sizeof(VertexPosTex5D) * buildingVertices.size());
         printf("Building Indices size: %lu\n", buildingIndices.size());
     }
 

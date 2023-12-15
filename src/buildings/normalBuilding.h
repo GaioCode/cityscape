@@ -7,7 +7,7 @@ class NormalBuilding
 {
     public:
         NormalBuilding(wolf::Program* programParam, const std::string& positionUniformParam, 
-        std::vector<sheep::VertexPositionTexture5D> vertices);
+        std::vector<sheep::VertexPosTex5D> vertices);
 
         ~NormalBuilding();
 

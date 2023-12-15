@@ -51,7 +51,7 @@
 // 	{ -0.5f, -0.5f, 0.5f,		0.0f, 0.0f },
 // };
 
-static const sheep::VertexPositionTexture5D cubeVertices[]
+static const sheep::VertexPosTex5D cubeVertices[]
 {
     // Front face
     {-0.5, -0.5,  0.5,  0.0, 0.0}, { 0.5, -0.5,  0.5,  1.0, 0.0}, { 0.5,  0.5,  0.5,  1.0, 1.0},
@@ -94,7 +94,7 @@ TexturedCube::TexturedCube(wolf::Program* programParam, const std::string& posit
 
         // Create VBOs
 		
-        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPositionTexture5D) * 36);
+        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPosTex5D) * 36);
 
         // Create VAO and assign VBOs and Texture Unit to it
 
@@ -127,7 +127,7 @@ TexturedCube::~TexturedCube()
 		positionVBO = 0;
 		textureManager = nullptr;
         isProgramGenerated = GL_FALSE;
-        printf("TexturedCube Class destructed.");
+        printf("TexturedCube Class destructed.\n");
     }
     
 }

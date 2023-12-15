@@ -2,12 +2,10 @@
 #include "../../wolf/wolf.h"
 #include "../../samplefw/Sample.h"
 #include "component.h"
-#include <vector>
+#include "../../src/randomNumberGenerator.h"
 
-// TODO: Put this in a proper place later
-#include <stdio.h>      /* printf, scanf, puts, NULL */
-#include <stdlib.h>     /* srand, rand */
-#include <time.h>       /* time */
+#include <vector>
+#include <random>
 
 namespace sheep
 {
@@ -21,9 +19,6 @@ namespace sheep
 
             void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
                         const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
-
-            // Create VBO and Index Buffer Object
-            void createBuffers();
 
             // Update vertex and index buffers
             // void updateBuffers();
@@ -53,23 +48,21 @@ namespace sheep
             void printBufferSize() const;
 
         protected:
+            // Create VBO and Index Buffer Object
+            void createBuffers();
+
             GLfloat rotateX, rotateY, rotateZ;
             glm::vec3 translateVector, scaleVector;
 
             static wolf::Program* program;
-            static wolf::VertexDeclaration* vao;
+            
             static wolf::Texture* textureManager;
 
-            static wolf::VertexBuffer* positionVBO;
-            static wolf::IndexBuffer* indexBuffer;
+            wolf::VertexDeclaration* vao;
+            wolf::VertexBuffer* positionVBO;
+            wolf::IndexBuffer* indexBuffer;
 
-            std::vector<VertexPositionTexture5D> buildingVertices;
+            std::vector<VertexPosTex5D> buildingVertices;
             std::vector<unsigned short> buildingIndices;
-
-            static int numBuildings;
-
-        private:
-
-            
     };
 }

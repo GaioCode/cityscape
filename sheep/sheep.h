@@ -7,8 +7,10 @@
 // Tools
 #include "tools/firstPersonCamera.h"
 #include "tools/building.h"
+#include "tools/buildingManager.h"
 #include "tools/component.h"
 #include "tools/componentHelper.h"
 
 // Building Types
 #include "tools/buildingTypes/standardBuilding.h"
+#include "tools/buildingTypes/polygonBuilding.h"

@@ -13,7 +13,7 @@ namespace sheep
         GLfloat x, y, z;
     };
 
-    struct VertexPositionTexture5D
+    struct VertexPosTex5D
     {
         GLfloat x, y, z;
         GLfloat u, v;

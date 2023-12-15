@@ -21,8 +21,8 @@ engine created by Gordon Wood.
 
 ## Extra Features Implemented
 
-## Challenges
 
+## Challenges
 **Deciding on the program's architecture**
 It was challenging to design the architecture as I had different classes of buildings, where each building class had
 varying components, textxures, and sizes. I considered a few different design patterns, including the Strategy Pattern
@@ -36,9 +36,12 @@ Building. This allowed removing a lot of boilerplate code for easy maintenance. 
 limited, it is sufficient for this time-critical project.
 
 This project has enlighened me with the strengths of ECS, and I will continue to explore its possbilities in the future.
-**
+
 
 **Deciding where to construct the VAOs, VBOs, IBOs, and Textures**
+
+
+**Handling indices for an n-sided prism generator**
 
 
 **Time Constraints**
@@ -46,4 +49,12 @@ Due to overwhelming academic responsibilities, I could not use the time provided
 Majority of the development time took place from 25 November to 15 December. However, the time constraint and pressure 
 made me more resourceful by solving problems in different ways, resulting in time for extra features to be implemented.
 
+
 ## Stretch Goals Unimplemented
+**Lighting**
+
+**Moving Vehicles**
+
+**Day/Night Cycle**
+
+**Rain Particles**
