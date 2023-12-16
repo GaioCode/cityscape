@@ -3,12 +3,12 @@
 
 namespace sheep
 {
-    struct VertexPosition2D
+    struct VertexPos2D
     {
         GLfloat x, y;
     };
 
-    struct VertexPosition3D
+    struct VertexPos3D
     {
         GLfloat x, y, z;
     };
@@ -17,6 +17,11 @@ namespace sheep
     {
         GLfloat x, y, z;
         GLfloat u, v;
+    };
+
+    struct TextureRegion
+    {
+        float uMin, vMin, uMax, vMax;
     };
 }
 

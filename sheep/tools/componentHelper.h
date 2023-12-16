@@ -24,6 +24,10 @@ namespace sheep
             static std::vector<VertexPosTex5D> transform(std::vector<VertexPosTex5D> vertices,
                                                          glm::vec3 translate, glm::vec3 rotate, glm::vec3 scale);
 
+            // Starting and ending offsets inclusive
+            static void applyTextureRegion(std::vector<VertexPosTex5D>& vertices, TextureRegion& region,
+                                           int startOffset, int endOffset);
+
             // Very small sine numbers are rounded to 0
             static float roundedSin(float angle);
 

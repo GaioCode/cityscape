@@ -1,6 +1,6 @@
 #include "cube.h"
 
-static const sheep::VertexPosition3D cubeVertices[]
+static const sheep::VertexPos3D cubeVertices[]
 {
     // Front
 	{ 0.0f, 0.0f, 1.0f },
@@ -69,7 +69,7 @@ Cube::Cube(wolf::Program* programParam, const std::string& positionUniformParam,
 
         // Create VBOs
 		
-        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPosition3D) * 36);
+        positionVBO = wolf::BufferManager::CreateVertexBuffer(cubeVertices, sizeof(sheep::VertexPos3D) * 36);
 
         // Create VAO and assign VBOs to it
 

@@ -5,26 +5,42 @@ namespace sheep
     
     wolf::Program* Building::program = nullptr;
     wolf::Texture* Building::textureManager = nullptr;
+    int Building::numBuildings = 0;
 
-    Building::Building(wolf::Program* programParam, const std::string& positionUniformParam)
+    Building::Building(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture,
+                       TextureType base, TextureType door, TextureType window, TextureType roof)
         : rotateX(0.0f), rotateY(0.0f), rotateZ(0.0f), scaleVector(glm::vec3(1.0f)), translateVector(glm::vec3(0.0f)),
-          positionVBO(nullptr), indexBuffer(nullptr), vao(nullptr)
+          positionVBO(nullptr), indexBuffer(nullptr), vao(nullptr),
+          baseT(textureCoordsMap[base]), doorT(textureCoordsMap[door]), windowT(textureCoordsMap[window]),
+          roofT(textureCoordsMap[roof]) 
     {
+        numBuildings++;
 
+        if (numBuildings == 1)
+        {
             program = programParam;
-            vao = new wolf::VertexDeclaration();
-
-            textureManager = wolf::TextureManager::CreateTexture("data/textures/testing1.png");
+            textureManager = wolf::TextureManager::CreateTexture(texture);
             textureManager->SetFilterMode(wolf::Texture::FM_Nearest, wolf::Texture::FM_Nearest);
+        }
+
+        vao = new wolf::VertexDeclaration();
+
     }
 
     // Pure virtual destructor
     Building::~Building()
     {
-            delete vao;
-            wolf::BufferManager::DestroyBuffer(positionVBO);
-            wolf::BufferManager::DestroyBuffer(indexBuffer);
+        
+        numBuildings--;
+        
+        if (numBuildings == 0)
+        {
             wolf::TextureManager::DestroyTexture(textureManager);
+        }
+
+        delete vao;
+        wolf::BufferManager::DestroyBuffer(positionVBO);
+        wolf::BufferManager::DestroyBuffer(indexBuffer);
     }
 
     void Building::render(const std::string& worldUniform, const std::string& projectionViewUniform, 
@@ -46,7 +62,7 @@ namespace sheep
 
         // Set texture uniform
 
-        program->SetUniform("tex", 0);
+        program->SetUniform(textureUniform, 0);
 
         program->Bind();        // Bind here to fix shifting (wolf issue)
 

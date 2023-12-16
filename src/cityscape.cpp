@@ -1,25 +1,22 @@
 #include "cityscape.h"
 
+// Changeable Constant Values:
+
+// Determines how many chunks to generate in the cityscape based on the grid.
+// Each chunk contains 4 buildings.
+// Eg. If GRID_SIZE = 10, then there are 10 x 10 = 100 chunks, so there are 400 buildings.
+const int GRID_SIZE = 1;
+
+// =================================================================================================================
+// =================================================================================================================
+
 Cityscape::~Cityscape()
 {
     printf("Destructing Cityscape World...\n");
 
     wolf::ProgramManager::DestroyProgram(mainProgram);
-
     delete camera;
-
-    // for (auto building : standardBuildings)
-    // {
-    //     delete building;
-    // }
-
-    for (auto building : polygonBuildings)
-        {
-            delete building;
-        }
-
-    // delete texturedCube1;
-    // texturedCube1 = nullptr;
+    delete entityManager;
 
     printf("Cityscape World destructed successfully.\n");
 }
@@ -34,65 +31,8 @@ void Cityscape::init()
         glEnable(GL_DEPTH_TEST);
 
         mainProgram = wolf::ProgramManager::CreateProgram("data/texture.vsh", "data/texture.fsh");
-        this->camera = new sheep::FirstPersonCamera(m_pApp);
-
-        isRegen = GL_TRUE;
-    }
-
-    // Reinitialize this section if regenerating world
-
-    if (isRegen)
-    {
-
-        // Render objects
-
-        float xOffset = 0.0f;
-        float zOffset = 0.0f;
-        int count = 0;
-        
-        // TODO: Remove later
-        // for (int i = 0; i < 20; i++)
-        // {
-        //     for (int j = 0; j < 20; j++)
-        //     {
-
-        //         standardBuildings.push_back(new sheep::StandardBuilding(mainProgram, "position"));
-        //         standardBuildings[count]->translate(xOffset, 0.0f, zOffset);
-
-        //         zOffset += 2.0f;
-        //         count++;
-        //     }
-        //     zOffset = 0.0f;
-        //     xOffset += 2.0f;
-        // }
-        
-        int heightRandom = 1;
-        int sidesRandom = 3;
-
-        for (int i = 0; i < 20; i++)
-        {
-            for (int j = 0; j < 20; j++)
-            {
-                // TODO: Put this somewhere better later
-                RandomNumberGenerator& rng = RandomNumberGenerator::getInstance();
-                heightRandom = RandomNumberGenerator::getInstance().getRandomNumber(3, 8);
-                sidesRandom = RandomNumberGenerator::getInstance().getRandomNumber(3, 8);
-
-                std::cout << "Building " << count << ": Height - " << heightRandom << ", Sides - " << sidesRandom << std::endl;
-
-                polygonBuildings.push_back(new sheep::PolygonBuilding(mainProgram, "position", heightRandom, sidesRandom));
-                polygonBuildings[count]->translate(xOffset, 0.0f, zOffset);
-
-                zOffset += 2.0f;
-                count++;
-            }
-            zOffset = 0.0f;
-            xOffset += 2.0f;
-        }
-
-        // texturedCube1 = new TexturedCube(mainProgram, "position");
-
-        isRegen = GL_FALSE;
+        entityManager = new sheep::EntityManager(GRID_SIZE, mainProgram, "position");
+        camera = new sheep::FirstPersonCamera(m_pApp);
     }
 }
 
@@ -118,42 +58,12 @@ void Cityscape::render(int width, int height)
 
     glm::mat4 projectionViewMatrix = projectionMatrix * viewMatrix;
 
-    // TODO: Remove later
-    // for (auto building : standardBuildings)
-    // {
-    //     building->render("world", "projectionView", "textureUniform", projectionViewMatrix);
-    // }
-
-    for (auto building : polygonBuildings)
-    {
-        building->render("world", "projectionView", "textureUniform", projectionViewMatrix);
-    }
-
-    // texturedCube1->render("world", "projectionView", "textureUniform", projectionViewMatrix);
+    entityManager->render("world", "projectionView", "tex", projectionViewMatrix);
 }
 
 void Cityscape::regenerate()
 {
     printf("Regenerating world...\n");
 
-    // for (auto building : standardBuildings)
-    // {
-    //     delete building;
-    // }
-
-    for (auto building : polygonBuildings)
-    {
-        delete building;
-    }
-
-    // standardBuildings.clear();
-
-    polygonBuildings.clear();
-
-    // delete texturedCube1;
-    // texturedCube1 = nullptr;
-
-    isRegen = GL_TRUE;
-
-    init();
+    entityManager->regenerateEntities(GRID_SIZE);
 }

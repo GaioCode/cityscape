@@ -2,29 +2,24 @@
 #include "../../wolf/wolf.h"
 #include "../../samplefw/Sample.h"
 #include "component.h"
-#include "../structures/textureMap.h"
+#include "../../src/randomNumberGenerator.h"
 
 #include <vector>
-#include <random>
 
 namespace sheep
 {
-    class Building
+    class Land
     {
         public:
 
-            Building(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture,
-                     TextureType base, TextureType door, TextureType window, TextureType roof);
+            Land(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture);
 
-            virtual ~Building() = 0;
+            ~Land();
 
             void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
                         const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
 
-            // Update vertex and index buffers
-            // void updateBuffers();
-
-            // Set the building to a new location in world space
+        // Set the building to a new location in world space
             // param x - x value to translate
             // param y - y value to translate
             // param z - z value to translate
@@ -48,24 +43,20 @@ namespace sheep
             // Debugging tool to print size of vertex and index data to console
             void printBufferSize() const;
 
-        protected:
-            // Create VBO and Index Buffer Object
-            void createBuffers();
+        private:
 
             GLfloat rotateX, rotateY, rotateZ;
             glm::vec3 translateVector, scaleVector;
             
             static wolf::Program* program;
             static wolf::Texture* textureManager;
-            static int numBuildings;
+            static int numLand;
 
             wolf::VertexDeclaration* vao;
             wolf::VertexBuffer* positionVBO;
             wolf::IndexBuffer* indexBuffer;
 
-            std::vector<VertexPosTex5D> buildingVertices;
-            std::vector<unsigned short> buildingIndices;
-
-            TextureRegion baseT, doorT, windowT, roofT;
+            std::vector<VertexPosTex5D> landVertices;
+            std::vector<unsigned short> landIndices;
     };
 }

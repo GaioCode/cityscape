@@ -3,10 +3,11 @@
 namespace sheep
 {
     
-    PolygonBuilding::PolygonBuilding(wolf::Program* programParam, const std::string& positionUniformParam, int height, int sides)
-        : Building(programParam, positionUniformParam)
+    PolygonBuilding::PolygonBuilding(wolf::Program* programParam, const std::string& positionUniformParam,
+                                     const std::string& texture, int height, int sides,
+                                     TextureType base, TextureType door, TextureType window, TextureType roof)
+        : Building(programParam, positionUniformParam, texture, base, door, window, roof)
     {  
-        std::cout << "Creating PolygonBuilding with height: " << height << ", sides: " << sides << std::endl;
 
         float yOffset = 0.0f;
         unsigned short currentOffset = 0;
@@ -15,14 +16,14 @@ namespace sheep
         {
             currentOffset = buildingVertices.size();
 
-            // Add vertices for this cube, with yOffset applied to the y component
+            // Add vertices for this object, with yOffset applied to the y component
 
             std::vector<VertexPosTex5D> tempVertices = 
                 Component::polygonVertices(sides, glm::vec3(0.0f, yOffset, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
 
             buildingVertices.insert(buildingVertices.end(), tempVertices.begin(), tempVertices.end());
 
-            // Add indices for this cube, offset by the current number of vertices
+            // Add indices for this object, offset by the current number of vertices
 
             std::vector<unsigned short> tempIndices = Component::polygonIndices(sides);
 
