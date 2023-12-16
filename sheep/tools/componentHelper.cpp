@@ -239,6 +239,19 @@ namespace sheep
         return vertices;
     }
 
+    void ComponentHelper::applyTextureRegion(std::vector<VertexPosTex5D>& vertices, TextureRegion& region,
+                                   int startOffset, int endOffset)
+    {
+        if (startOffset > endOffset || endOffset > vertices.size()) {
+        throw std::invalid_argument("Invalid range for applying texture region");
+        }
+        
+        for (int i = startOffset; i <= endOffset; ++i) {
+            vertices[i].u = region.uMin + vertices[i].u * (region.uMax - region.uMin);
+            vertices[i].v = region.vMin + vertices[i].v * (region.vMax - region.vMin);
+        }
+    }
+
     float ComponentHelper::roundedSin(float angle) {
         float result = std::sin(angle);
         if (std::abs(result) < EPSILON)

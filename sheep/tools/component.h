@@ -9,12 +9,10 @@ namespace sheep
     class Component
     {
         public:
-            enum ComponentType
-            {
-                base = 0,
-                middle = 1,
-                roof = 2
-            };
+
+            static std::vector<VertexPosTex5D> landVertices();
+
+            static std::vector<unsigned short> landIndices();
 
             static std::vector<VertexPosTex5D> cubeStandardVertices();
 

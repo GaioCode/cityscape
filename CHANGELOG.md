@@ -54,6 +54,10 @@ StandardBuilding. StandardBuilding will comprise of 3 different components: the 
 - Implemented randomization to generate random buildings
 
 ## version 2.1.0
+This version aims to create a way to generate polygon prisms. This generator will be able to generate a polygon prism
+of any sides, providing the correct vertices and indices. Moreover, this version also aims to add a regenerate tool to
+regenerate the city. This involves destructing the entire city and reconstructing it. The reconstruction will
+re-randomize the entire city and its buildings.
 
 - Added regenerate() in Cityscape class to regenerate a new random world
 - Added transform() in ComponentHelper class to transform individual vertices
@@ -61,3 +65,9 @@ StandardBuilding. StandardBuilding will comprise of 3 different components: the 
 - Created n-sided polygon generator for vertices and indices
 - Set textures to nearest filtering
 - Fixed a bug where all buildings are generated using the same VBO data
+
+## version 3.0.0
+This version aims to add roads and a class to manage entities. Entities include roads, buildings, and any future objects,
+such as lamps. The entity manager will handle the building generaton and randomization, including randomizing the
+building's components.
+

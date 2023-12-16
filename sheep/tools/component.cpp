@@ -2,6 +2,17 @@
 
 namespace sheep
 {
+
+    std::vector<VertexPosTex5D> Component::landVertices()
+    {
+        return planeUniqueVertices;
+    }
+
+    std::vector<unsigned short> Component::landIndices()
+    {
+        return planeIndices;
+    }
+
     std::vector<VertexPosTex5D> Component::cubeStandardVertices()
     {
         return cubeUniqueVertices;
