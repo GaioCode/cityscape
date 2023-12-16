@@ -69,7 +69,6 @@ namespace sheep {
         GLfloat bldgZOffset = chunkZOffset + EDGE_OFFSET;
         GLfloat rotationAngle = 0.0f;                           // Rotates building after each building is placed
 
-        // TODO: Move this later
         // Retrieve texture regions
 
         TextureType base;
@@ -77,7 +76,6 @@ namespace sheep {
         TextureType window;
         TextureType roof;        
 
-        // TODO: Delete later
         int numBuilding = 0;
 
         for (int i = 0; i < gridSize; i++)
@@ -104,8 +102,8 @@ namespace sheep {
                         if (k == 1 && l == 0) rotationAngle = rotationRandom == 1 ? 90.0f : 180.0f;
                         if (k == 1 && l == 1) rotationAngle = rotationRandom == 1 ? 0.0f : 90.0f;
 
-                        // if (rng.getRandomNumber(0, 1) == 0)        // TODO: change back later
-                        if (GL_TRUE)
+                        if (rng.getRandomNumber(0, 1) == 0)        // TODO: change back later
+                        // if (GL_TRUE)
                         {
                             // TODO: Randomize height with a weight system later
                             StandardBuilding* building
@@ -127,9 +125,7 @@ namespace sheep {
                             polygonBuildings[polygonBuildings.size() - 1]->rotate(0.0f, glm::radians(rotationAngle), 0.0f);
 
                             bldgSizeOffset = 1.0f;
-                        }
-
-                        printf("ding! rotateOffset = %f\n", rotationAngle); 
+                        } 
                         
                         bldgZOffset += bldgSizeOffset + BLDG_OFFSET;    // Offset z in local chunk
 

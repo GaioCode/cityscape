@@ -15,7 +15,5 @@ namespace sheep
 
             void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
                         const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
-
-        private:
     };
 }

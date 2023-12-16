@@ -21,6 +21,30 @@ namespace sheep
             std::vector<VertexPosTex5D> tempVertices = 
                 Component::polygonVertices(sides, glm::vec3(0.0f, yOffset, 0.0f), glm::vec3(0.0f), glm::vec3(1.0f));
 
+            // Apply textures
+            // Top and Bottom Faces
+
+            // Center top vertice + center bottom vertice + top and bottom outer vertices - 1 (zero index inclusive)
+            int numTBVertices = 2 + (sides * 2);
+
+            ComponentHelper::applyTextureRegion(tempVertices, roofT, 0, numTBVertices - 1);
+
+            // Front, Back, Left, and Right Faces
+            
+
+            if (i == 0)
+            {
+                // Front Face
+                ComponentHelper::applyTextureRegion(tempVertices, doorT, numTBVertices, numTBVertices + 3);
+
+                // Back, Left, Right
+                ComponentHelper::applyTextureRegion(tempVertices, baseT, numTBVertices + 4, numTBVertices + 3 + 4 * (sides - 1));   
+            }
+            else
+            {
+                ComponentHelper::applyTextureRegion(tempVertices, windowT, numTBVertices, numTBVertices - 1 + 4 * (sides));
+            }
+
             buildingVertices.insert(buildingVertices.end(), tempVertices.begin(), tempVertices.end());
 
             // Add indices for this object, offset by the current number of vertices

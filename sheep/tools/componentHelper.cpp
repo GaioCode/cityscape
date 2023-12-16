@@ -217,7 +217,6 @@ namespace sheep
         return indices;
     }
 
-
     std::vector<VertexPosTex5D> ComponentHelper::transform(std::vector<VertexPosTex5D> vertices,
                                                            glm::vec3 translate, glm::vec3 rotate, glm::vec3 scale)
     {

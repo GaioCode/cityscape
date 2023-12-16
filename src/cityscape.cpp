@@ -5,7 +5,7 @@
 // Determines how many chunks to generate in the cityscape based on the grid.
 // Each chunk contains 4 buildings.
 // Eg. If GRID_SIZE = 10, then there are 10 x 10 = 100 chunks, so there are 400 buildings.
-const int GRID_SIZE = 1;
+const int GRID_SIZE = 10;
 
 // =================================================================================================================
 // =================================================================================================================
