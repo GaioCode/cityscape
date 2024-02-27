@@ -5,15 +5,11 @@ namespace sheep
     
     StandardBuilding::StandardBuilding(wolf::Program* programParam, const std::string& positionUniformParam,
                                        const std::string& texture, int height,
-                                       TextureType base, TextureType door, TextureType window, TextureType roof)
-        : Building(programParam, positionUniformParam, texture, base, door, window, roof)
+                                       const TextureSet& textureSet)
+        : Building(programParam, positionUniformParam, texture, textureSet)
     {  
 
         float yOffset = 0.0f;
-
-        // Retrieve texture regions
-
-        
         
         for (int i = 0; i < height; i++)
         {

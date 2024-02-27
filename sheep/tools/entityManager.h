@@ -9,6 +9,7 @@
 #include "land.h"
 #include "buildingTypes/standardBuilding.h"
 #include "buildingTypes/polygonBuilding.h"
+#include "buildingTypes/spiralBuilding.h"
 
 namespace sheep
 {
@@ -38,6 +39,7 @@ namespace sheep
             std::vector<Land*> landVector;
             std::vector<StandardBuilding*> standardBuildings;
             std::vector<PolygonBuilding*> polygonBuildings;
+            std::vector<SpiralBuilding*> spiralBuildings;
 
             void generateEntities();
 

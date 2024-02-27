@@ -2,7 +2,7 @@
 #include "../../wolf/wolf.h"
 #include "../../samplefw/Sample.h"
 #include "component.h"
-#include "../../src/randomNumberGenerator.h"
+#include "../structures/textureMap.h"
 
 #include <vector>
 
@@ -12,7 +12,8 @@ namespace sheep
     {
         public:
 
-            Land(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture);
+            Land(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture, 
+                 const LandTextureSet& textureSet);
 
             ~Land();
 
@@ -58,5 +59,6 @@ namespace sheep
 
             std::vector<VertexPosTex5D> landVertices;
             std::vector<unsigned short> landIndices;
+            TextureRegion landT, blankT;
     };
 }

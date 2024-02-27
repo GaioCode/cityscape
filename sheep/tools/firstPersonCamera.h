@@ -80,6 +80,12 @@ namespace sheep
 
             // Check if receiving mouse input for the first time
             GLboolean isFirstMouseInput = GL_TRUE;
+
+            // Barrel roll variables
+
+            GLboolean isBarrelRolling = GL_FALSE;
+            float barrelRollStartTime = 0.0f;
+            float roll = 0.0f;
     };
 }
 

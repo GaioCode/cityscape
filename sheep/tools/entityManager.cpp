@@ -32,12 +32,14 @@ namespace sheep {
         GLfloat landXOffset = 0.0f;
         GLfloat landZOffset = 0.0f;
         const GLfloat LAND_Y_OFFSET = -1.0f;
+
+        LandTextureSet chosenLandSet = landTextureSets[0];
         
         for (int i = 0; i < gridSize; i++)
         {
             for (int j = 0; j < gridSize; j++)
             {
-                Land* land = new Land(program, positionUniform, landTexture);
+                Land* land = new Land(program, positionUniform, landTexture, chosenLandSet);
                 landVector.push_back(land);
                 landVector[landVector.size() - 1]->translate(landXOffset, LAND_Y_OFFSET, landZOffset);
                 landVector[landVector.size() - 1]->scale(LAND_SIZE, 1.0f, LAND_SIZE);
@@ -90,6 +92,7 @@ namespace sheep {
                         // Randomize building type and parameters
 
                         RandomNumberGenerator& rng = RandomNumberGenerator::getInstance();
+                        int buildingRandom = rng.getRandomNumber(0, 100);
                         int heightRandom = rng.getRandomNumber(3, 8);
                         int sidesRandom = rng.getRandomNumber(3, 8);
                         int textureSetIndex = rng.getRandomNumber(0, textureSets.size() - 1);
@@ -102,30 +105,45 @@ namespace sheep {
                         if (k == 1 && l == 0) rotationAngle = rotationRandom == 1 ? 90.0f : 180.0f;
                         if (k == 1 && l == 1) rotationAngle = rotationRandom == 1 ? 0.0f : 90.0f;
 
-                        if (rng.getRandomNumber(0, 1) == 0)        // TODO: change back later
-                        // if (GL_TRUE)
+                        if (buildingRandom > 50)
+                        // if (GL_FALSE)
                         {
                             // TODO: Randomize height with a weight system later
                             StandardBuilding* building
-                                = new StandardBuilding(program, positionUniform, bldgTexture, heightRandom,
-                                    chosenSet.base, chosenSet.door, chosenSet.window, chosenSet.roof);
+                                = new StandardBuilding(program, positionUniform, bldgTexture, heightRandom, chosenSet);
                             standardBuildings.push_back(building);
                             standardBuildings[standardBuildings.size() - 1]->translate(bldgXOffset, 0.0f, bldgZOffset);
                             standardBuildings[standardBuildings.size() - 1]->rotate(0.0f, glm::radians(rotationAngle), 0.0f);
 
                             bldgSizeOffset = 1.0f;
                         }
-                        else
+                        else if (buildingRandom <= 50 && buildingRandom > 3)
+                        // else if (GL_FALSE)
                         {
                             PolygonBuilding* building = new PolygonBuilding(program, positionUniform, bldgTexture,
-                                heightRandom, sidesRandom,
-                                chosenSet.base, chosenSet.door, chosenSet.window, chosenSet.roof);
+                                heightRandom, sidesRandom, chosenSet);
                             polygonBuildings.push_back(building);
                             polygonBuildings[polygonBuildings.size() - 1]->translate(bldgXOffset, 0.0f, bldgZOffset);
                             polygonBuildings[polygonBuildings.size() - 1]->rotate(0.0f, glm::radians(rotationAngle), 0.0f);
 
                             bldgSizeOffset = 1.0f;
-                        } 
+                        }
+                        else
+                        {
+                            int index = rng.getRandomNumber(0, quarterTextureSets.size() - 1);
+                            chosenSet = textureSets[index];
+                            TextureSet chosenQuarterSet = quarterTextureSets[index];
+
+                            heightRandom = rng.getRandomNumber(1, 3);
+                            int spiralHeight = rng. getRandomNumber(20, 40);
+                            SpiralBuilding* building = new SpiralBuilding(program, positionUniform, bldgTexture,
+                                heightRandom, spiralHeight, chosenSet, chosenQuarterSet);
+                            spiralBuildings.push_back(building);
+                            spiralBuildings[spiralBuildings.size() - 1]->translate(bldgXOffset, 0.0f, bldgZOffset);
+                            spiralBuildings[spiralBuildings.size() - 1]->rotate(0.0f, glm::radians(rotationAngle), 0.0f);
+
+                            bldgSizeOffset = 1.0f;
+                        }
                         
                         bldgZOffset += bldgSizeOffset + BLDG_OFFSET;    // Offset z in local chunk
 
@@ -168,6 +186,9 @@ namespace sheep {
         for (auto building : polygonBuildings) {
             building->render(worldUniform, projectionViewUniform, textureUniform, projectionViewMatrix);
         }
+        for (auto building : spiralBuildings) {
+            building->render(worldUniform, projectionViewUniform, textureUniform, projectionViewMatrix);
+        }
     }
 
     void EntityManager::clearEntities()
@@ -191,6 +212,12 @@ namespace sheep {
             delete building;
         }
         polygonBuildings.clear();
+
+        for (auto building : spiralBuildings)
+        {
+            delete building;
+        }
+        spiralBuildings.clear();
 
         printf("EntityManager: Buildings destructed.\n");
     }

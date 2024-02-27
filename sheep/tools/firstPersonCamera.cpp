@@ -27,6 +27,9 @@ namespace sheep
     // Affects how much the camera moves when the mouse moves
     const float MOUSE_SENSITIVITY = 0.1f;
 
+    // Set how long a barrel roll should last
+    const float BARREL_ROLL_DURATION = 5.0f;
+
     // =================================================================================================================
     // =================================================================================================================
 
@@ -44,16 +47,16 @@ namespace sheep
 
         // Initialize view values (in this chronological order):
 
-        this->cameraPositionVector = INITIAL_CAMERA_POSITION;
-        this->updateCameraDirection();
-        this->updateCameraRight();
-        this->updateCameraUp();
-        this->cameraFrontVector = glm::normalize(INITIAL_LOOK_AT - INITIAL_CAMERA_POSITION);
+        cameraPositionVector = INITIAL_CAMERA_POSITION;
+        updateCameraDirection();
+        updateCameraRight();
+        updateCameraUp();
+        cameraFrontVector = glm::normalize(INITIAL_LOOK_AT - INITIAL_CAMERA_POSITION);
 
-        this->yaw = INITIAL_YAW;
-        this->pitch = INITIAL_PITCH;
+        yaw = INITIAL_YAW;
+        pitch = INITIAL_PITCH;
 
-        this->mouseLastPosition = application->getMousePos();
+        mouseLastPosition = application->getMousePos();
 
         // Set cursor at the middle of the screen at all times
         glfwSetInputMode(application->getWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
@@ -66,8 +69,8 @@ namespace sheep
 
     void FirstPersonCamera::update(float dt)
     {
-        this->currentFrame = glfwGetTime();
-        this->deltaTime = currentFrame - lastFrame;
+        currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
         lastFrame = currentFrame;
 
         // Keyboard WASD camera movements
@@ -86,55 +89,64 @@ namespace sheep
 
         if (application->isKeyDown('w'))
         {
-            this->cameraPositionVector += cameraSpeed * forwardVectorNoY;
+            cameraPositionVector += cameraSpeed * forwardVectorNoY;
         }
         if (application->isKeyDown('s'))
         {
-            this->cameraPositionVector -= cameraSpeed * forwardVectorNoY;
+            cameraPositionVector -= cameraSpeed * forwardVectorNoY;
         }
         if (application->isKeyDown('a'))
         {
-            this->cameraPositionVector -= rightVectorNoY * this->cameraSpeed;
+            cameraPositionVector -= rightVectorNoY * cameraSpeed;
         }
         if (application->isKeyDown('d'))
         {
-            this->cameraPositionVector += rightVectorNoY * this->cameraSpeed;
+            cameraPositionVector += rightVectorNoY * cameraSpeed;
         }
         
         // Ascend/descend camera movements
 
         if (application->isKeyDown(32))   // Spacebar
         {
-            this->cameraPositionVector.y += cameraSpeed;
+            cameraPositionVector.y += cameraSpeed;
         }
         if (application->isKeyDown(340))     // Left Shift
         {
-            this->cameraPositionVector.y -= this->cameraSpeed;
+            cameraPositionVector.y -= cameraSpeed;
         }
 
         // Mouse camera movements
 
-        this->mouseCallback(application->getMousePos());
+        mouseCallback(application->getMousePos());
+
+        // Barrel Rolling
+
+        if (application->isKeyDown('b') && !isBarrelRolling)
+        {
+            isBarrelRolling = true;
+            barrelRollStartTime = glfwGetTime();
+        }
+
     }
 
     void FirstPersonCamera::setCameraPosition(glm::vec3 newVector)
     {
-        this->cameraPositionVector = newVector;
+        cameraPositionVector = newVector;
     }
 
     void FirstPersonCamera::updateCameraDirection()
     {
-        this->cameraDirection = glm::normalize(this->cameraPositionVector - CAMERA_TARGET_VECTOR);
+        cameraDirection = glm::normalize(cameraPositionVector - CAMERA_TARGET_VECTOR);
     }
 
     void FirstPersonCamera::updateCameraRight()
     {
-        this->cameraRightVector = glm::normalize(glm::cross(UP_VECTOR, this->cameraDirection));
+        cameraRightVector = glm::normalize(glm::cross(UP_VECTOR, cameraDirection));
     }
 
     void FirstPersonCamera::updateCameraUp()
     {
-        this->cameraUpVector = glm::cross(this->cameraDirection, this->cameraRightVector);
+        cameraUpVector = glm::cross(cameraDirection, cameraRightVector);
     }
 
     void FirstPersonCamera::mouseCallback(glm::vec2 mousePosition)
@@ -154,8 +166,8 @@ namespace sheep
 
         mousePositionOffset = mousePositionOffset * MOUSE_SENSITIVITY;
 
-        this->yaw += mousePositionOffset.x;
-        this->pitch += mousePositionOffset.y;
+        yaw += mousePositionOffset.x;
+        pitch += mousePositionOffset.y;
 
         // Prevent camera from going out of bounds
         if (pitch > 89.0f)
@@ -173,24 +185,41 @@ namespace sheep
         direction.y = sin(glm::radians(pitch));
         direction.z = sin(glm::radians(yaw)) * cos(glm::radians(pitch));
 
-        this->cameraFrontVector = glm::normalize(direction);
+        cameraFrontVector = glm::normalize(direction);
     }
 
     glm::mat4 FirstPersonCamera::getProjectionMatrix(int width, int height)
     {
-        return glm::perspective(fov, (float)width / (float)height, this->nearPlane, this->farPlane);
+        return glm::perspective(fov, (float)width / (float)height, nearPlane, farPlane);
     }
 
     glm::mat4 FirstPersonCamera::getViewMatrix()
     {
-        return glm::lookAt(this->cameraPositionVector, this->cameraPositionVector + this->cameraFrontVector, 
-        this->cameraUpVector);   
+        glm::vec3 up = cameraUpVector;
+
+        if (isBarrelRolling)
+        {
+            float elapsedTime = glfwGetTime() - barrelRollStartTime;
+            if (elapsedTime < BARREL_ROLL_DURATION)
+            {
+                roll = -(360.0f / BARREL_ROLL_DURATION) * elapsedTime;
+                glm::mat4 rotation = glm::rotate(glm::mat4(1.0f), glm::radians(roll), cameraFrontVector);
+                up = glm::vec3(rotation * glm::vec4(cameraUpVector, 0.0f));
+            }
+            else
+            {
+                isBarrelRolling = false;
+                roll = 0.0f;
+            }
+        }
+
+        return glm::lookAt(cameraPositionVector, cameraPositionVector + cameraFrontVector, up);   
     }
 
     void FirstPersonCamera::printCameraInfo() const
     {
-        std::cout << "Camera Position: " << glm::to_string(this->cameraPositionVector);
-        std::cout << ", Camera Front: " << glm::to_string(this->cameraFrontVector);
-        printf(", pitch: %f, yaw: %f\n", this->pitch, this->yaw);
+        std::cout << "Camera Position: " << glm::to_string(cameraPositionVector);
+        std::cout << ", Camera Front: " << glm::to_string(cameraFrontVector);
+        printf(", pitch: %f, yaw: %f\n", pitch, yaw);
     }
 }

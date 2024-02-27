@@ -9,7 +9,7 @@ namespace sheep
 
             StandardBuilding(wolf::Program* programParam, const std::string& positionUniformParam,
                              const std::string& texture, int height,
-                             TextureType base, TextureType door, TextureType window, TextureType roof);
+                             const TextureSet& textureSet);
 
             ~StandardBuilding() override;
 

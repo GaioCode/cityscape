@@ -9,7 +9,7 @@ namespace sheep
 
             PolygonBuilding(wolf::Program* programParam, const std::string& positionUniformParam,
                             const std::string& texture, int height, int sides,
-                            TextureType base, TextureType door, TextureType window, TextureType roof);
+                            const TextureSet& textureSet);
 
             ~PolygonBuilding() override;
 

@@ -12,7 +12,9 @@
 #include "tools/component.h"
 #include "tools/componentHelper.h"
 #include "tools/land.h"
+#include "tools/skybox.h"
 
 // Building Types
 #include "tools/buildingTypes/standardBuilding.h"
 #include "tools/buildingTypes/polygonBuilding.h"
+#include "tools/buildingTypes/spiralBuilding.h"
