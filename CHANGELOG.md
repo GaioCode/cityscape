@@ -40,7 +40,7 @@ This version aims to create a textured cube.
 ## version 2.0.0
 The goal is to set up a class hierarchy that contains classes to generate buildings. A Building class will be an
 abstract class consisting of many differnet components. This version aims to create just one building model, called 
-StandardBuilding. StandardBuilding will comprise of 3 different components: the base, middle, and height.
+StandardBuilding.
 
 - Created sheep.h to store all header files
 - Adjusted code to implement sheep.h where necessary
@@ -81,6 +81,12 @@ Aseprite.
   logical randomization
 - Edited Building class and its child classes to support texture atlassing
 
-## version 3.0.1
+## version 3.1.0
+This version aims to add texture atlassing to PolygonBuilding. It also aims to introduce a new type of building:
+SpiralBuilding, a building where its floors have a rotation and size offset as it spirals to the top. A small, fun
+trick is also added to FirstPersonCamera.
 
 - Fixed texture atlassing for PolygonBuilding
+- Added barrel rolling to FirstPersonCamera
+- Added SpiralBuilding class
+- Add texture atlassing to Land class (fixed other sides showing the road images)

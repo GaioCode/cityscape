@@ -8,11 +8,11 @@ namespace sheep
     int Building::numBuildings = 0;
 
     Building::Building(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture,
-                       TextureType base, TextureType door, TextureType window, TextureType roof)
+                       const TextureSet& textureSet)
         : rotateX(0.0f), rotateY(0.0f), rotateZ(0.0f), scaleVector(glm::vec3(1.0f)), translateVector(glm::vec3(0.0f)),
           positionVBO(nullptr), indexBuffer(nullptr), vao(nullptr),
-          baseT(textureCoordsMap[base]), doorT(textureCoordsMap[door]), windowT(textureCoordsMap[window]),
-          roofT(textureCoordsMap[roof]) 
+          baseT(textureCoordsMap[textureSet.base]), doorT(textureCoordsMap[textureSet.door]), 
+          windowT(textureCoordsMap[textureSet.window]), roofT(textureCoordsMap[textureSet.roof])
     {
         numBuildings++;
 

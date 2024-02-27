@@ -14,7 +14,7 @@ namespace sheep
         public:
 
             Building(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture,
-                     TextureType base, TextureType door, TextureType window, TextureType roof);
+                     const TextureSet& textureSet);
 
             virtual ~Building() = 0;
 

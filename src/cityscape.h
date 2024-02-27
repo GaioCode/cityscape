@@ -7,10 +7,6 @@
 #include <iostream>
 #include <glm/gtx/string_cast.hpp>
 
-// Objects (unused)
-#include "cube.h"
-#include "texturedCube.h"
-
 class Cityscape: public Sample
 {
     public:

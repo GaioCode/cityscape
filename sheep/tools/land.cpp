@@ -6,9 +6,11 @@ namespace sheep
     wolf::Program* Land::program = nullptr;
     wolf::Texture* Land::textureManager = nullptr;
 
-    Land::Land(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture)
+    Land::Land(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& texture,
+               const LandTextureSet& textureSet)
         : rotateX(0.0f), rotateY(0.0f), rotateZ(0.0f), scaleVector(glm::vec3(1.0f)), translateVector(glm::vec3(0.0f)),
-          positionVBO(nullptr), indexBuffer(nullptr), vao(nullptr)
+          positionVBO(nullptr), indexBuffer(nullptr), vao(nullptr),
+          landT(textureCoordsMap[textureSet.land]), blankT(textureCoordsMap[textureSet.blank])
     {
             program = programParam;
             vao = new wolf::VertexDeclaration();
@@ -17,6 +19,14 @@ namespace sheep
             textureManager->SetFilterMode(wolf::Texture::FM_Nearest, wolf::Texture::FM_Nearest);
 
             landVertices = cubeUniqueVertices;
+
+            // Apply Textures
+            // Top face
+            ComponentHelper::applyTextureRegion(landVertices, landT, 0, 3);
+
+            // Other faces
+            ComponentHelper::applyTextureRegion(landVertices, blankT, 4, 23);
+
             landIndices = cubeIndices;
 
             // Create buffers

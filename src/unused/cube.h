@@ -1,19 +1,22 @@
 #pragma once
-#include "../wolf/wolf.h"
-#include "../samplefw/Sample.h"
-#include "../sheep/sheep.h"
+#include "../../wolf/wolf.h"
+#include "../../samplefw/Sample.h"
+#include "../../sheep/structures/basicStructures.h"
 
-class TexturedCube
+class Cube
 {
     public:
-       TexturedCube(wolf::Program* programParam, const std::string& positionUniformParam);
+       Cube(wolf::Program* programParam, const std::string& positionUniformParam, const std::string& colorUniformParam);
 
-       ~TexturedCube();
+       ~Cube();
 
        void update(float dt);
 
-       void render(const std::string& worldUniform, const std::string& projectionViewUniform, 
-       const std::string& textureUniform, const glm::mat4& projectionViewMatrix);
+       void render(const std::string& worldUniform, const std::string& projectionViewUniform,
+       const glm::mat4& projectionViewMatrix);
+
+       void render(const std::string& worldUniform, const std::string& viewUniform, const std::string& projectionUniform,
+       const glm::mat4& viewMatrix, const glm::mat4& projectionMatrix);
 
         // Set the cube to a new location in world space
         // param x - x value to translate
@@ -32,12 +35,17 @@ class TexturedCube
         // param y - Rotate y coordinate in radians (float).
         // param z - Rotate z coordinate in radians (float).
         void rotate(GLfloat x, GLfloat y, GLfloat z);
+        
+        // Change cube RGB and Alpha value
+        // param color - vec4 of red, green, blue, and alpha GLfloat values
+        void setColor(const glm::vec4& color);
 
     private:
         GLfloat rotateX = 0.0f;
         GLfloat rotateY = 0.0f;
         GLfloat rotateZ = 0.0f;
         glm::vec3 translateVector = glm::vec3(0.0f);
+        glm::vec4 colorVector = glm::vec4(0.0f);
         glm::vec3 scaleVector = glm::vec3(1.0f);
         float time = 0;
 

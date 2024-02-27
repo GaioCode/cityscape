@@ -5,8 +5,8 @@ namespace sheep
     
     PolygonBuilding::PolygonBuilding(wolf::Program* programParam, const std::string& positionUniformParam,
                                      const std::string& texture, int height, int sides,
-                                     TextureType base, TextureType door, TextureType window, TextureType roof)
-        : Building(programParam, positionUniformParam, texture, base, door, window, roof)
+                                     const TextureSet& textureSet)
+        : Building(programParam, positionUniformParam, texture, textureSet)
     {  
 
         float yOffset = 0.0f;

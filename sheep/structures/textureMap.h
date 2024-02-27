@@ -11,7 +11,15 @@ namespace sheep
         Brick1Window, Brick2Window, Brick3Window,
         Brick1Door, Brick2Door, Brick3Door,
         GlassRoof,
-        Brick1Roof, Brick2Roof, Brick3Roof
+        Brick1Roof, Brick2Roof, Brick3Roof,
+
+        Glass1WindowHalf, Glass2WindowHalf, Glass3WindowHalf,
+        Brick1WindowHalf, Brick2WindowHalf, Brick3WindowHalf,
+
+        Glass1WindowQuarter, Glass2WindowQuarter, Glass3WindowQuarter,
+        Brick1WindowQuarter, Brick2WindowQuarter, Brick3WindowQuarter,
+
+        Land1, LandBlank,
     };
 
     struct TextureSet
@@ -22,8 +30,17 @@ namespace sheep
         TextureType roof;       // Top and bottom face
         
     };
+    
+    struct LandTextureSet
+    {
+        TextureType land;       // The top surface of the land, showing the actual texture
+        TextureType blank;      // Placeholder texture for blank surfaces
+    };
 
     extern std::map<TextureType, TextureRegion> textureCoordsMap;
     extern std::vector<TextureSet> textureSets;
+    extern std::vector<TextureSet> halfTextureSets;
+    extern std::vector<TextureSet> quarterTextureSets;
+    extern std::vector<LandTextureSet> landTextureSets;
 }
 
