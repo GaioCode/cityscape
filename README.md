@@ -5,8 +5,8 @@ Supervisor: Gordon Wood
 
 CHANGELOG.md contains all documented changes.
 
-![alt text](screenshots/cityscape_pic1.png)
-![alt text](screenshots/cityscape_pic2.png)
+![alt text](preview/cityscape_pic1.png)
+![alt text](preview/cityscape_pic2.png)
 
 ## Introduction
 Cityscape is a procedurally-generated city created using the OpenGL API. The aim of this project is to construct
