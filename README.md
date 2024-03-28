@@ -1,10 +1,12 @@
-# CityScape
+# CityScape (2023)
 by Shaun Yin Sen Lee
 
 Supervisor: Gordon Wood
 
-CHANGELOG.md will contain all documented changes.
+CHANGELOG.md contains all documented changes.
 
+![alt text](screenshots/cityscape_pic1.png)
+![alt text](screenshots/cityscape_pic2.png)
 
 ## Introduction
 Cityscape is a procedurally-generated city created using the OpenGL API. The aim of this project is to construct
@@ -57,8 +59,8 @@ smooth camera movements.
 
 ## Extra Features Implemented
 **Road Generation**
-Each chunk contains a road texture. The road's texture is designed to scale correctly with the buildings using both
-mathematics to offset the buildings correctly and planning the art designs according to scale. Roads also have an 
+Each chunk contains a road texture. The road's texture is designed to scale correctly with the buildings, calculated 
+to offset the buildings correctly and planning the art designs according to scale. Roads also have an 
 "extension-like pattern", visually complementing additional road chunks that are next to each other.
 
 
@@ -119,9 +121,9 @@ as I use texture atlassing.
 
 
 **Creating the n-sided prism generator**
-Handling the mathematics behind the n-sided prism generator was very complex, and I spent a lot of time on this. There
-were many unknown errors relating to the vertex and index data due to how the algorithm was set up. However, I am
-grateful for the experience of making it work.
+Handling the mathematics behind the n-sided prism generator was very complex,taking a lot of time. There
+were many errors relating to the vertex and index data related to the algorithm. However, it worked out in the end, and 
+I am grateful for the experience.
 
 
 **Scaling artwork with pixel objects**
@@ -137,12 +139,11 @@ it but also to rework all of the textures so they work with lighting.
 
 **More Building Models, Street Lamps, Benches, and Other Entities**
 With the n-polygon prism geenrator and flexible component methods, we can create interesting shapes for many different 
-entities. This would require more work, especially when textures have to accomodate for the new entities. Therefore,
-it was not implemented.
+entities. This would require more work, especially when textures have to accomodate for the new entities.
 
 
 **Better Building Details**
-It would be great to include more details into the building, adding differnet roof designs and small components, such as
+I would like to include more details into the building, adding differnet roof designs and small components, such as
 signboards, air conditioning exhaust units, or water storage attachments.
 
 
@@ -151,20 +152,20 @@ I would love to add more building texture variety as well as rework the existing
 
 
 **Skybox**
-A skybox would help beautify the external world. Althogh I have explored the idea of it, I did not have the time to
-fully implement it.
+A skybox would help beautify the external world. Althogh I have explored the idea of it, implementing it would require 
+more time.
 
 
 **Face Culling**
 Face culling would remove textures that are within buildings or entities where the player should not be seeing. This
-would improve the frame rate. However, the method of creating buildings would be very complex, and a lot of restructuring
-would be needed.
+would improve the frame rate. However, the method of creating buildings would be complex and requires restructurin the 
+code.
 
 
 **Code Optimization and Cleanup**
-There is a lot of code that requires cleaning up. For example, I would find a way to categorize both Buildings and Land
-as children of an Entity class as they share many similarities. Adding new entities, such as street lamps, would also
-fall under the Entity class.
+The code could be better optimised. For example, I would find a way to categorize both Buildings and Land as children 
+of an Entity class as they share many similarities. Adding new entities, such as street lamps, should also fall under 
+the Entity class.
 
 
 **Moving Vehicles**
@@ -182,6 +183,6 @@ comes.
 
 
 ## Final Thoughts
-I am very grateful for this opportunity to learn about computer graphics programming. Although my project is not perfect,
-it was very humbling experience, and I feel more confident in my programming and problem-solving skills, as well as
-feeling empowered to make video games in the future. I will learn from my mistakes and do better in the future.
+I am very grateful for this opportunity to learn about computer graphics programming. Although the project has room for 
+improvement, it was very humbling yet empowering experience. I am confident that this experience will help me develop 
+better projects in the future.
