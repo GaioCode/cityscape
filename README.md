@@ -5,6 +5,7 @@ Supervisor: Gordon Wood
 
 CHANGELOG.md contains all documented changes.
 
+<video controls src="preview/cityscape_video.mp4" title="Title"></video>
 ![alt text](preview/cityscape_pic1.png)
 ![alt text](preview/cityscape_pic2.png)
 
