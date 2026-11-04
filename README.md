@@ -1,192 +1,77 @@
-# CityScape (2023)
-by Shaun Yin Sen Lee
+# CityScape
 
-Supervisor: Gordon Wood
+An explorable, procedurally generated city built with **C++ and OpenGL** for a graphics programming assignment at the **University of Prince Edward Island**.
 
-CHANGELOG.md contains all documented changes.
+The city combines randomized building shapes, heights, and textures with first-person navigation. It was developed using **Wolf**, a partial engine supplied by my course instructor, **Gordon Wood**. I made a few small bug fixes to the supplied engine while developing the project.
 
-**Video Preview:**<br>
-[![Watch the video](https://img.youtube.com/vi/q2RmQjoOTbk/0.jpg)](https://youtu.be/q2RmQjoOTbk)
+**Coursework period:** November–December 2023. The repository also contains later updates.
 
-**Image Preview:**<br>
-![alt text](preview/cityscape_pic1.png)
-![alt text](preview/cityscape_pic2.png)
+## Preview
 
-## Introduction
-Cityscape is a procedurally-generated city created using the OpenGL API. The aim of this project is to construct
-an explorable, random cityscape, where buildings have different shapes and sizes. This project uses *Wolf*, a partial
-engine created by Gordon Wood.
+[![Watch the CityScape video preview](https://img.youtube.com/vi/q2RmQjoOTbk/0.jpg)](https://youtu.be/q2RmQjoOTbk)
 
+![CityScape screenshot showing procedurally generated buildings](preview/cityscape_pic1.png)
+![A second view of the generated cityscape](preview/cityscape_pic2.png)
+
+## Features
+
+- **Procedural city layout:** Buildings are arranged in a grid of land chunks, with four buildings per chunk and road textures connecting the layout. The default configuration uses a 10 × 10 grid, creating 400 buildings.
+- **Building variety:** Standard, polygonal, and spiral buildings provide different silhouettes. Heights, texture sets, and road-facing orientations are randomized.
+- **World regeneration:** Generate a new randomized city without restarting the application.
+- **First-person exploration:** Move through the city using mouse look, keyboard movement, sprinting, and vertical controls.
+- **Custom pixel art:** I created 40+ individual textures in Aseprite and combined them into a single texture atlas. Coordinated texture sets provide visual variety while keeping each building's appearance consistent.
+- **Procedural geometry:** Polygon-prism generation calculates vertex and index data for buildings with different numbers of sides.
 
 ## Controls
-- Use the WASD keys and mouse for first-person movement.
-- Use Left-Control to sprint.
-- Use Spacebar to ascend and Left-Shift to descend.
-- Press R to regenerate the world.
-- Press B to perform a very cool action.
 
+| Input | Action |
+| --- | --- |
+| W, A, S, D | Move |
+| Mouse | Look around |
+| Left Ctrl | Sprint |
+| Space | Ascend |
+| Left Shift | Descend |
+| R | Regenerate the city |
+| B | Perform a camera barrel roll |
 
-## Core Features
-**1. Building Generation**<br>
-The cityscape composes of cuboid buildings. Each building is built using components that are placed on top of one
-another, each offsetting the previous building. Each building consist of windows, a door, and roof textures. The 
-building generation and itsrandomization is handled by EntityManager.
+## Technical approach and lessons
 
+### Building structure
 
-**2. Varing Heights and Sizes**<br>
-Buildings have various height. This is done by determing how many floors to add for the building. There are also 
-different buildings that come with different sizes (more on *Building Shapes* below).
+I used a shared `Building` base class with separate standard, polygonal, and spiral building types. This kept common functionality together while allowing each type to generate its own geometry. I considered other approaches, including an entity component system, but chose inheritance to keep the assignment manageable within the available time.
 
+An `EntityManager` handles the city layout and building randomization. It also clears and recreates the entities when the world is regenerated.
 
-**3. Grid-Like Generation of Buildings**<br>
-There are four buildings geneated in a chunk of land. The buildings are slightly offset from the middle of the chunk and
-from each other. The outer parts of the chunk consists of the road.
+### Geometry and rendering
 
-When buildings are placed on the land, their front face (the face with a door) will always face towards the roadside.
-Since every building has two corners, each building may face one of two sides. Some randomization is added to which 
-side of the road it will face.
+The polygon-prism generator uses trigonometry to calculate vertices and constructs index data for the faces. Developing it gave me practice debugging vertex and index data, alongside the texture mapping needed for the buildings.
 
+The project also gave me experience organizing vertex and index buffers alongside shared textures. Different building geometries require their own data, while texture atlases allow building artwork to share a texture resource.
 
-**4. Minimum of 400 Buildings**<br>
-The project must be able to support at least 400 buildings with a reasonable framerate.
+### Texture design
 
+Drawing the artwork and implementing the texture mapping were closely connected. I combined more than 40 individual textures into one atlas and accounted for building proportions, atlas regions, and repeated surfaces so the pixel art would scale consistently across different shapes. Texture sets group compatible walls, doors, windows, and roofs rather than selecting every surface independently.
 
-**5. Regenerating the World**<br>
-When hitting the R key, the world should destruct and regenerate. Upon regenerating, the buildings should be randomized
-again.
+## Scope and limitations
 
+This repository preserves the coursework project. The default building count describes the configured layout; it is not a performance benchmark.
 
-**6. First Person Camera**<br>
-The first person camera allows the user to look and move around. I wanted to design a camera similar to Minecraft's
-smooth camera movements.
+Ideas explored during the assignment but left unimplemented included lighting, a skybox, additional street objects, more detailed buildings, face culling, moving vehicles, a day/night cycle, and rain effects. These are historical ideas rather than a current development roadmap.
 
+## Repository notes
 
-## Extra Features Implemented
-**Road Generation**<br>
-Each chunk contains a road texture. The road's texture is designed to scale correctly with the buildings, calculated 
-to offset the buildings correctly and planning the art designs according to scale. Roads also have an 
-"extension-like pattern", visually complementing additional road chunks that are next to each other.
+- `src/` contains the application entry point and cityscape setup.
+- `sheep/` contains project helpers, building types, camera controls, and entity management.
+- `data/` contains shaders and textures.
+- `preview/` contains the screenshots used above.
+- [CHANGELOG.md](CHANGELOG.md) records the project's development notes.
 
+The project references the supplied Wolf engine, sample framework, and third-party components through Git submodules. Building it may require access to the original course dependencies.
 
-**Building Shapes**<br>
-There are 3 types of buildings in the world: standard buildings, polygons, and spirals. Standard buildings are regular
-cuboid buildings that compliment any texture well, as textures are specifically designed for them.
+## Credits
 
-Polygon buildings are built from prisms using a complex polygon generator algorithm. The algorithm will generate the 
-vertex and index data for the polygon building.
+**Project author:** Shaun Lee (GaioCode)
 
-The spiral building starts out with a regular base. At a certain point of the building, each floor with be slightly 
-smaller than the previous and has a slight offset. This creates a spiral-like look, hoping to mimic some unique 
-real-world buildings with that design.
+**Course instructor and supplied Wolf engine:** Gordon Wood (MrTinto)
 
-
-## Side Features Implemented
-**Texture Atlassing**<br>
-Texture atlassing allowed me to store many textures within one file and use a single static texture variable for all of
-my buildings.
-
-
-**N-Sided Prism Generator**<br>
-The n-sided prism generator allows the user to input the amount of sides, where sides > 3, to generate any polygon. It
-uses trigonometric calculations to generate the sides. Another method helps to generate the indices of the prism.
-
-
-**Textures Randomly Chosen in a Set**<br>
-While textures are randomized, they are randomized in fixed texture sets. This allows the building to look consistent
-with its design while providing randomization, where a building can be one of many texture sets.
-
-
-**Custom-Draw Pixel Art**<br>
-All artwork used in the project has been custom-drawn using Aseprite.
-
-
-## Challenges
-**Deciding on the program's architecture**<br>
-It was challenging to design the architecture as I had different classes of buildings, where each building class had
-varying components, textxures, and sizes. I considered a few different design patterns, including the Strategy Pattern
-and Decorator pattern, but I struggled to understand how I could implement the code to work with those patterns. I also
-researched on an Entity Component System (ECS). While this is possible and preferred in many types of games, creating
-this cityscape using ECS would require me to learn from the beginning. With the time I have to finish the project, there
-it was best that I used a different technique.
-
-In the end, I used inheritance for my Building classes, where the program creates buildings using the child classes of
-Building. This allowed removing a lot of boilerplate code for easy maintenance. While the flexibility of inheritance is
-limited, it is sufficient for this time-critical project.
-
-This project has enlighened me with the strengths of ECS, and I will continue to explore its possbilities in the future.
-
-
-**Deciding where to construct the VAOs, VBOs, IBOs, and Textures**<br>
-I spent a lot of time determining where to put the the buffers and textures. As the Building class is the parent of the
-PolygonBuilding, SpiralBuilding, and StandardBuilding child classes, my initial thought was to place all buffers and
-textures at the highest hierarchy of inheritance. However, I have understood that different buildings will need to have
-their own buffers as they have unique vertices and indices, while textures can be handled by the Building parent class
-as I use texture atlassing.
-
-
-**Creating the n-sided prism generator**<br>
-Handling the mathematics behind the n-sided prism generator was very complex,taking a lot of time. There
-were many errors relating to the vertex and index data related to the algorithm. However, it worked out in the end, and 
-I am grateful for the experience.
-
-
-**Scaling artwork with pixel objects**<br>
-My texture designs have to scale correctly with the buildings and other objects. This was a challenge to accomplish,
-requiring creating ways of scaling my art correctly when designing it while playing around with texture atlassing.
-
-
-## Stretch Goals Unimplemented
-**Lighting**<br>
-Lighting would greatly improve the aesthetics of the world, but it would require a lot of time to not just implement
-it but also to rework all of the textures so they work with lighting.
-
-
-**More Building Models, Street Lamps, Benches, and Other Entities**<br>
-With the n-polygon prism geenrator and flexible component methods, we can create interesting shapes for many different 
-entities. This would require more work, especially when textures have to accomodate for the new entities.
-
-
-**Better Building Details**<br>
-I would like to include more details into the building, adding differnet roof designs and small components, such as
-signboards, air conditioning exhaust units, or water storage attachments.
-
-
-**Art Rework**<br>
-I would love to add more building texture variety as well as rework the existing artwork.
-
-
-**Skybox**<br>
-A skybox would help beautify the external world. Althogh I have explored the idea of it, implementing it would require 
-more time.
-
-
-**Face Culling**<br>
-Face culling would remove textures that are within buildings or entities where the player should not be seeing. This
-would improve the frame rate. However, the method of creating buildings would be complex and requires restructurin the 
-code.
-
-
-**Code Optimization and Cleanup**<br>
-The code could be better optimised. For example, I would find a way to categorize both Buildings and Land as children 
-of an Entity class as they share many similarities. Adding new entities, such as street lamps, should also fall under 
-the Entity class.
-
-
-**Moving Vehicles**<br>
-I have the idea of making moving vehicles that travel from one part of the city to another. They would spawn at the
-edges of the world and disappear when they reach the opposite side.
-
-
-**Day/Night Cycle**<br>
-A day-night cycle would require lighting to be implemented first.
-
-
-**Rain Particles**<br>
-I would allow rain particles to be toggled on and off for extra visual effects. The sky would also darken as the rain
-comes.
-
-
-## Final Thoughts
-I am very grateful for this opportunity to learn about computer graphics programming. Although the project has room for 
-improvement, it was very humbling yet empowering experience. I am confident that this experience will help me develop 
-better projects in the future.
+Thank you to Gordon Wood for the framework and guidance that supported this introduction to graphics programming.
